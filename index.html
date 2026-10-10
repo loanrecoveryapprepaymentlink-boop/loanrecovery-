@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Payment Portal</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f4f5f7; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .container { background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
+        .header { font-size: 20px; font-weight: bold; margin-bottom: 20px; color: #333; }
+        .details { margin-bottom: 20px; font-size: 16px; color: #555; text-align: left; background: #f9f9f9; padding: 10px; border-radius: 8px; }
+        .details b { color: #333; }
+        .upi-box { margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #ddd; padding: 10px; border-radius: 8px; }
+        .upi-id { font-weight: bold; color: #007bff; word-break: break-all; }
+        .btn-copy { background: #007bff; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; }
+        .scanner-box { border: 2px dashed #007bff; padding: 20px; border-radius: 12px; margin-bottom: 20px; }
+        .qr-placeholder { width: 150px; height: 150px; background: #eee; margin: 0 auto; display: flex; align-items: center; justify-content: center; color: #888; border: 1px solid #ddd; font-size: 12px; }
+        .btn-pay { display: block; width: 100%; background: #28a745; color: #fff; border: none; padding: 12px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; text-decoration: none; margin-bottom: 20px; }
+        .utr-box { text-align: left; }
+        .utr-box label { font-size: 14px; font-weight: bold; color: #333; }
+        .utr-box input { width: 100%; padding: 10px; margin: 8px 0 12px 0; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
+        .btn-submit { width: 100%; background: #0056b3; color: #fff; border: none; padding: 10px; border-radius: 6px; cursor: pointer; }
+        .status { margin-top: 15px; display: none; padding: 10px; border-radius: 6px; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">Secure Payment Portal</div>
+    
+    <div class="details">
+        <div><b>Customer:</b> <span id="cust-name">John Doe</span></div>
+        <div><b>Loan App:</b> <span id="app-name">Express Cash</span></div>
+        <div><b>Amount Due:</b> ₹5,000</div>
+    </div>
+
+    <div class="upi-box">
+        <span class="upi-id" id="upi-id">paytm-merchant@upi</span>
+        <button class="btn-copy" onclick="copyUpi()">Copy</button>
+    </div>
+
+    <div class="scanner-box">
+        <div class="qr-placeholder" id="qr-code">QR Scanner Image<br>(Add QR Code Here)</div>
+    </div>
+
+    <a href="upi://pay?pa=paytm-merchant@upi&pn=ExpressCash&am=5000" class="btn-pay">Pay via UPI</a>
+
+    <div class="utr-box">
+        <label for="utr">Enter UTR / Transaction ID</label>
+        <input type="text" id="utr" placeholder="123456789012">
+        <button class="btn-submit" onclick="submitUtr()">Submit UTR</button>
+    </div>
+    
+    <div class="status" id="status"></div>
+</div>
+
+<script>
+    function copyUpi() {
+        const upi = document.getElementById('upi-id').innerText;
+        navigator.clipboard.writeText(upi);
+        alert('UPI ID copied!');
+    }
+
+    function submitUtr() {
+        const utr = document.getElementById('utr').value;
+        const status = document.getElementById('status');
+        
+        if (utr.length < 12) {
+            status.style.display = 'block';
+            status.style.background = '#f8d7da';
+            status.style.color = '#721c24';
+            status.innerText = 'Please enter a valid 12-digit UTR.';
+        } else {
+            status.style.display = 'block';
+            status.style.background = '#d4edda';
+            status.style.color = '#155724';
+            status.innerText = 'UTR submitted successfully. Processing payment...';
+        }
+    }
+</script>
+
+</body>
+</html>
