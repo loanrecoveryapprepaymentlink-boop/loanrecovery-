@@ -344,7 +344,7 @@
         .payment-option-right {
             font-weight: 600;
             color: #111827;
-            font-size: 14px;
+            font-size: 13.5px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -381,7 +381,7 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        /* Step 3 Gateway Screen - Perfectly Aligned and Cleaned */
+        /* Step 3 Gateway Screen */
         #step3Screen {
             display: none;
             position: fixed;
@@ -405,22 +405,22 @@
         .step3-top-header {
             background: #000000;
             color: white;
-            padding: 16px 20px;
+            padding: 14px 20px;
             width: 100%;
         }
         .step3-amount-title {
-            font-size: 15px;
+            font-size: 13.5px;
             font-weight: 400;
             color: #ffffff;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
         .step3-amount-title span {
             font-weight: 700;
-            font-size: 16px;
+            font-size: 14.5px;
         }
         .step3-discount {
             color: #f97316;
-            font-size: 13.5px;
+            font-size: 13px;
             font-weight: 600;
         }
         .gateway-card {
@@ -501,30 +501,37 @@
             justify-content: center;
         }
 
-        .upi-copy-box {
-            background: #f3f4f6;
-            border: 1px solid #e5e7eb;
-            padding: 10px 14px;
-            border-radius: 10px;
+        /* Exact Layout Matching Image 17 (Separate UPI Box & Copy Button) */
+        .upi-section-row {
             display: flex;
-            justify-content: space-between;
+            gap: 10px;
             align-items: center;
             margin-top: 8px;
             margin-bottom: 8px;
-            font-weight: 700;
-            font-size: 15px;
-            color: #111827;
         }
-        .copy-btn {
-            background: #2977ff;
+        .upi-display-box {
+            flex: 1;
+            background: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 14.5px;
+            color: #111827;
+            text-align: center;
+        }
+        .copy-btn-new {
+            background: #1677ff;
             color: white;
             border: none;
-            padding: 9px 20px;
+            padding: 12px 24px;
             border-radius: 10px;
             font-weight: 600;
-            font-size: 14.5px;
+            font-size: 15px;
             cursor: pointer;
+            box-shadow: 0 2px 6px rgba(22, 119, 255, 0.2);
         }
+
         .utr-input {
             width: 100%;
             padding: 14px;
@@ -728,10 +735,13 @@
 
         <div class="gateway-card">
             <div style="font-size: 13px; color: #4b5563; margin-bottom: 4px;">1.Copy the UPI below and <span style="color: #f97316; font-weight:600;" id="lblTransferText">transfer ₹3328.99</span></div>
-            <div class="upi-copy-box">
-                <span id="upiText">637************bkns</span>
-                <button class="copy-btn" onclick="copyUpi()">Copy</button>
+            
+            <!-- Exact Separated UPI Box & Copy Button Layout -->
+            <div class="upi-section-row">
+                <div class="upi-display-box" id="upiText">637************bkns</div>
+                <button class="copy-btn-new" onclick="copyUpi()">Copy</button>
             </div>
+
             <div class="tip-red">Tip: Don't save the upi, this upi is valid for 10 minutes</div>
 
             <div style="font-size: 13px; color: #4b5563; margin-top: 10px; margin-bottom: 4px;">2.Fill in UTR after payment</div>
