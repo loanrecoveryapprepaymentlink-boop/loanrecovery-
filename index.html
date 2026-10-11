@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Repayment Portal</title>
     <style>
         * {
@@ -19,6 +19,8 @@
             align-items: center;
             min-height: 100vh;
             padding: 10px;
+            touch-action: manipulation;
+            -webkit-text-size-adjust: 100%;
         }
         .container {
             width: 100%;
@@ -33,10 +35,10 @@
         /* Top Banner Card */
         .top-card {
             background: linear-gradient(135deg, #4da3ff 0%, #2977ff 50%, #1052dc 100%);
-            margin: 14px 14px 0 14px;
+            margin: 10px 14px 0 14px;
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;
-            padding: 22px 15px;
+            padding: 18px 15px;
             text-align: center;
         }
         .logo-area {
@@ -44,11 +46,11 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
         .logo-box {
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
             background: white;
             border-radius: 8px;
             display: flex;
@@ -57,16 +59,16 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.06);
         }
         .brand-name {
-            font-size: 22px;
+            font-size: 21px;
             font-weight: 700;
             letter-spacing: -0.3px;
-            color: #1a1a1a;
+            color: #ffffff;
         }
         .mobile-num {
-            font-size: 14px;
-            color: #262626;
+            font-size: 13.5px;
+            color: #ffffff;
             font-weight: 400;
-            margin-top: 4px;
+            margin-top: 2px;
         }
 
         /* Amount & Date Card */
@@ -253,7 +255,7 @@
             font-weight: 600;
         }
 
-        /* Modal Overlay (Step 2) - Exact Original Match */
+        /* Modal Overlay (Step 2) */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -272,7 +274,7 @@
             max-width: 410px;
             border-top-left-radius: 28px;
             border-top-right-radius: 28px;
-            padding: 30px 22px 35px 22px;
+            padding: 24px 22px 32px 22px;
             animation: slideUp 0.3s ease-out;
         }
         @keyframes slideUp {
@@ -281,19 +283,19 @@
         }
         .modal-header {
             text-align: center;
-            margin-bottom: 22px;
+            margin-bottom: 18px;
         }
         .modal-logo-box {
-            width: 54px;
-            height: 54px;
+            width: 68px;
+            height: 68px;
             background: #ffffff;
-            border: 1px solid #f0f0f0;
-            border-radius: 16px;
+            border: 1.5px solid #eaeaea;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 10px auto;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            margin: 0 auto 12px auto;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
         }
         .modal-logo-area {
             font-weight: 700;
@@ -302,7 +304,7 @@
             margin-bottom: 6px;
         }
         .modal-amount {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 800;
             color: #1b6ef3;
             letter-spacing: -0.5px;
@@ -311,11 +313,11 @@
             background: #fff8f8;
             border: 1px solid #ffe3e3;
             color: #d32f2f;
-            padding: 14px;
+            padding: 12px 14px;
             border-radius: 12px;
-            font-size: 12.5px;
+            font-size: 12px;
             line-height: 1.45;
-            margin-bottom: 22px;
+            margin-bottom: 18px;
             text-align: center;
             font-weight: 500;
         }
@@ -323,8 +325,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #f3f4f6;
+            padding: 12px 0;
+            border-bottom: 1px solid #f2f3f5;
             font-size: 14.5px;
         }
         .payment-option-left {
@@ -334,14 +336,14 @@
             font-weight: 600;
         }
         .sub-text {
-            font-size: 12px;
+            font-size: 11.5px;
             color: #9ca3af;
-            margin-top: 3px;
+            margin-top: 2px;
             font-weight: 400;
         }
         .payment-option-right {
             font-weight: 700;
-            color: #111827; /* Dark black amount color matching original */
+            color: #111827;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -364,22 +366,21 @@
             border-radius: 50%;
             background: #f3f4f6;
         }
-        /* Solid Dark Black Repay Button */
         .btn-repay-modal {
             width: 100%;
             background: #222222;
             color: white;
             border: none;
-            padding: 16px;
+            padding: 15px;
             border-radius: 14px;
             font-size: 16px;
             font-weight: 600;
-            margin-top: 28px;
+            margin-top: 24px;
             cursor: pointer;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        /* Step 3 Gateway Screen */
+        /* Step 3 Gateway Screen - Exact Image 15 Match */
         #step3Screen {
             display: none;
             position: fixed;
@@ -401,81 +402,111 @@
             padding-bottom: 30px;
         }
         .step3-top-header {
-            background: #000;
+            background: #000000;
             color: white;
-            padding: 20px;
+            padding: 16px 20px;
         }
         .step3-amount-title {
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 15px;
+            font-weight: 400;
+            color: #ffffff;
             margin-bottom: 4px;
         }
+        .step3-amount-title span {
+            font-weight: 700;
+            font-size: 16px;
+        }
         .step3-discount {
-            color: #ea580c;
-            font-size: 14px;
+            color: #f97316;
+            font-size: 13.5px;
             font-weight: 600;
         }
         .gateway-card {
             background: white;
-            margin: 15px;
+            margin: 14px;
             border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            padding: 18px 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
         }
         .method-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             font-size: 14px;
             color: #374151;
-            font-weight: 600;
+            font-weight: 500;
         }
         .timer {
-            color: #ea580c;
+            color: #f97316;
             font-weight: 700;
         }
+        
+        /* App Option Box Matching Image 15 Exact */
         .pay-app-btn {
             display: flex;
             justify-content: space-between;
             align-items: center;
             border: 1px solid #e5e7eb;
-            padding: 14px 16px;
+            padding: 12px 16px;
             border-radius: 12px;
-            margin-bottom: 10px;
-            background: #f9fafb;
+            margin-bottom: 12px;
+            background: #ffffff;
             cursor: pointer;
+            height: 56px;
         }
-        .pay-app-left {
+        .app-brand-left {
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        .app-logo-box {
-            width: 30px;
-            height: 30px;
+
+        /* SVG Logos for Paytm and PhonePe Exact Branding */
+        .paytm-logo-text {
+            font-family: Arial, sans-serif;
+            font-weight: 900;
+            font-size: 26px;
+            letter-spacing: -0.8px;
+        }
+        .paytm-blue { color: #002e6e; }
+        .paytm-cyan { color: #00b9f1; }
+
+        .phonepe-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .phonepe-icon-circle {
+            width: 36px;
+            height: 36px;
+            background: #5f259f;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-        .pay-app-name {
-            font-size: 22px;
+            color: white;
             font-weight: 800;
-            letter-spacing: -0.5px;
+            font-size: 18px;
+            font-family: Arial, sans-serif;
         }
-        .pay-app-name.paytm { color: #00b9f1; }
-        .pay-app-name.phonepe { color: #5f259f; }
-        
-        .click-icon {
-            color: #0088cc;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .phonepe-text {
+            color: #5f259f;
+            font-size: 20px;
+            font-weight: 700;
+            font-family: Arial, sans-serif;
+            letter-spacing: -0.3px;
         }
+
+        /* Exact Hand Tap Icon on Right */
+        .hand-tap-icon {
+            width: 26px;
+            height: 26px;
+        }
+
         .upi-copy-box {
             background: #f3f4f6;
             border: 1px solid #e5e7eb;
-            padding: 12px 14px;
+            padding: 10px 14px;
             border-radius: 10px;
             display: flex;
             justify-content: space-between;
@@ -490,10 +521,10 @@
             background: #2977ff;
             color: white;
             border: none;
-            padding: 10px 22px;
+            padding: 9px 20px;
             border-radius: 10px;
             font-weight: 600;
-            font-size: 15px;
+            font-size: 14.5px;
             cursor: pointer;
         }
         .utr-input {
@@ -512,10 +543,10 @@
         }
         .submit-utr-btn {
             width: 100%;
-            background: #2977ff;
+            background: #1677ff;
             color: white;
             border: none;
-            padding: 15px;
+            padding: 14px;
             border-radius: 12px;
             font-size: 16px;
             font-weight: 600;
@@ -537,7 +568,7 @@
     <div class="top-card">
         <div class="logo-area">
             <div class="logo-box">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z" fill="#2977ff"/>
                     <path d="M7 16V9L10 13L13 9V16M15 16V13C15 11.8954 15.8954 11 17 11V16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -613,7 +644,7 @@
     <div class="modal-content" onclick="event.stopPropagation()">
         <div class="modal-header">
             <div class="modal-logo-box">
-                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="42" height="42" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z" fill="#2977ff"/>
                     <path d="M7 16V9L10 13L13 9V16M15 16V13C15 11.8954 15.8954 11 17 11V16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -637,7 +668,7 @@
             </div>
         </div>
 
-        <div class="payment-option" style="border-bottom: none; margin-top: 8px;">
+        <div class="payment-option" style="border-bottom: none; margin-top: 4px;">
             <div class="payment-option-left">
                 <span>UPI</span>
             </div>
@@ -651,11 +682,11 @@
     </div>
 </div>
 
-<!-- Step 3: Final Payment Gateway Screen -->
+<!-- Step 3: Final Payment Gateway Screen - Exact Match with Image 15 -->
 <div id="step3Screen">
     <div class="step3-container">
         <div class="step3-top-header">
-            <div class="step3-amount-title" id="lblStep3Payable">Amount Payable: ₹3328.99</div>
+            <div class="step3-amount-title">Amount Payable: <span id="lblStep3Payable">₹3328.99</span></div>
             <div class="step3-discount" id="lblStep3Discount">Get ₹0.01 off</div>
         </div>
 
@@ -665,39 +696,40 @@
                 <span class="timer" id="lblTimer">04:50</span>
             </div>
 
+            <!-- Exact Original Paytm Option -->
             <div class="pay-app-btn" onclick="alert('Opening Paytm App...')">
-                <div class="pay-app-left">
-                    <div class="app-logo-box">
-                        <svg width="26" height="26" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#00b9f1"/><path d="M9 16h3.5v6H15v-6h3.5v-2H9v2z" fill="#fff"/></svg>
-                    </div>
-                    <span class="pay-app-name paytm">Paytm</span>
+                <div class="paytm-logo-text">
+                    <span class="paytm-blue">pay</span><span class="paytm-cyan">tm</span>
                 </div>
-                <span class="click-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0088cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/>
-                        <path d="M12 6v6l4 2"/>
+                <!-- Blue Hand Tap Icon -->
+                <div class="hand-tap-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="#0088ff" stroke-width="2"/>
+                        <path d="M11.5 8V12.5L14 15" stroke="#0088ff" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M15 11C15 11 16.5 12.5 16.5 14C16.5 15.5 15 17 13.5 17C12 17 10 15 10 15" stroke="#0088ff" stroke-width="1.8" stroke-linecap="round"/>
                     </svg>
-                </span>
+                </div>
             </div>
 
+            <!-- Exact Original PhonePe Option -->
             <div class="pay-app-btn" onclick="alert('Opening PhonePe App...')">
-                <div class="pay-app-left">
-                    <div class="app-logo-box">
-                        <svg width="26" height="26" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#5f259f"/><path d="M10 9h6.5a4.5 4.5 0 0 1 0 9H13v5h-3V9zm3 6h3.5a1.5 1.5 0 0 0 0-3H13v3z" fill="#fff"/></svg>
-                    </div>
-                    <span class="pay-app-name phonepe">PhonePe</span>
+                <div class="phonepe-brand">
+                    <div class="phonepe-icon-circle">पे</div>
+                    <span class="phonepe-text">PhonePe</span>
                 </div>
-                <span class="click-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0088cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/>
-                        <path d="M12 6v6l4 2"/>
+                <!-- Blue Hand Tap Icon -->
+                <div class="hand-tap-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="#0088ff" stroke-width="2"/>
+                        <path d="M11.5 8V12.5L14 15" stroke="#0088ff" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M15 11C15 11 16.5 12.5 16.5 14C16.5 15.5 15 17 13.5 17C12 17 10 15 10 15" stroke="#0088ff" stroke-width="1.8" stroke-linecap="round"/>
                     </svg>
-                </span>
+                </div>
             </div>
         </div>
 
         <div class="gateway-card">
-            <div style="font-size: 13px; color: #4b5563; margin-bottom: 4px;">1.Copy the UPI below and <span style="color: #ea580c; font-weight:600;" id="lblTransferText">transfer ₹3328.99</span></div>
+            <div style="font-size: 13px; color: #4b5563; margin-bottom: 4px;">1.Copy the UPI below and <span style="color: #f97316; font-weight:600;" id="lblTransferText">transfer ₹3328.99</span></div>
             <div class="upi-copy-box">
                 <span id="upiText">637************bkns</span>
                 <button class="copy-btn" onclick="copyUpi()">Copy</button>
@@ -711,7 +743,7 @@
         </div>
 
         <div style="text-align: center; font-size: 12px; color: #6b7280; margin-top: 15px;">
-            Tip: How to get UTR? Please <span style="color: #ea580c; text-decoration: underline; cursor: pointer;" onclick="alert('UTR is the 12-digit reference number from your payment app history.')">click here</span>
+            Tip: How to get UTR? Please <span style="color: #f97316; text-decoration: underline; cursor: pointer;" onclick="alert('UTR is the 12-digit reference number from your payment app history.')">click here</span>
         </div>
     </div>
 </div>
@@ -768,7 +800,7 @@
         document.getElementById('lblWalletDeduct').innerText = `-${CONFIG.walletBalanceDisplay}`;
         document.getElementById('lblUpiAmount').innerText = `-${CONFIG.payableAmountModal}`;
         
-        document.getElementById('lblStep3Payable').innerText = `Amount Payable: ${CONFIG.payableAmountStep3}`;
+        document.getElementById('lblStep3Payable').innerText = CONFIG.payableAmountStep3;
         document.getElementById('lblStep3Discount').innerText = CONFIG.discountText;
         document.getElementById('lblTimer').innerText = CONFIG.timerValue;
         document.getElementById('lblTransferText').innerText = `transfer ${CONFIG.payableAmountStep3}`;
