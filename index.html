@@ -18,7 +18,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 10px;
+            padding: 0;
             touch-action: manipulation;
             -webkit-text-size-adjust: 100%;
         }
@@ -342,8 +342,9 @@
             font-weight: 400;
         }
         .payment-option-right {
-            font-weight: 700;
+            font-weight: 600;
             color: #111827;
+            font-size: 14px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -380,7 +381,7 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        /* Step 3 Gateway Screen - Exact Image 15 Match */
+        /* Step 3 Gateway Screen - Perfectly Aligned and Cleaned */
         #step3Screen {
             display: none;
             position: fixed;
@@ -388,7 +389,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #121212;
+            background: #f3f4f8;
             overflow-y: auto;
             z-index: 200;
             justify-content: center;
@@ -405,6 +406,7 @@
             background: #000000;
             color: white;
             padding: 16px 20px;
+            width: 100%;
         }
         .step3-amount-title {
             font-size: 15px;
@@ -455,7 +457,6 @@
             height: 56px;
         }
         
-        /* Exact Original Paytm Branding Style (Image 15) */
         .paytm-logo-text {
             font-family: Arial, sans-serif;
             font-weight: 900;
@@ -466,7 +467,6 @@
         .paytm-blue { color: #002e6e; }
         .paytm-cyan { color: #00b9f1; }
 
-        /* Exact Original PhonePe Branding Style (Image 15) */
         .phonepe-brand {
             display: flex;
             align-items: center;
@@ -493,7 +493,6 @@
             letter-spacing: -0.3px;
         }
         
-        /* Exact Original Hand/Click Tap Icon Style (Image 15) */
         .hand-tap-icon {
             width: 28px;
             height: 28px;
@@ -662,7 +661,7 @@
                 <span class="sub-text" id="lblWalletSub">Available balance: ₹0</span>
             </div>
             <div class="payment-option-right">
-                <span style="color: #111827; font-weight: 700;" id="lblWalletDeduct">-₹0</span>
+                <span id="lblWalletDeduct">-₹0</span>
                 <div class="radio-dot-gray"></div>
             </div>
         </div>
@@ -672,7 +671,7 @@
                 <span>UPI</span>
             </div>
             <div class="payment-option-right">
-                <span style="color: #111827; font-weight: 700;" id="lblUpiAmount">-₹3,329</span>
+                <span id="lblUpiAmount">-₹3,329</span>
                 <div class="radio-dot">✓</div>
             </div>
         </div>
@@ -681,7 +680,7 @@
     </div>
 </div>
 
-<!-- Step 3: Final Payment Gateway Screen - Exact Image 15 Match -->
+<!-- Step 3: Final Payment Gateway Screen -->
 <div id="step3Screen">
     <div class="step3-container">
         <div class="step3-top-header">
@@ -700,7 +699,6 @@
                 <div class="paytm-logo-text">
                     <span class="paytm-blue">pay</span><span class="paytm-cyan">tm</span>
                 </div>
-                <!-- Exact Original Hand Click Icon (Image 15) -->
                 <div class="hand-tap-icon">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18 11V6a2 2 0 0 0-4 0v5" stroke="#007aff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -717,7 +715,6 @@
                     <div class="phonepe-icon-circle">पे</div>
                     <span class="phonepe-text">PhonePe</span>
                 </div>
-                <!-- Exact Original Hand Click Icon (Image 15) -->
                 <div class="hand-tap-icon">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18 11V6a2 2 0 0 0-4 0v5" stroke="#007aff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
