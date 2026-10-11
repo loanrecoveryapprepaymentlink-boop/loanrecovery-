@@ -286,25 +286,25 @@
             margin-bottom: 18px;
         }
         .modal-logo-box {
-            width: 68px;
-            height: 68px;
+            width: 64px;
+            height: 64px;
             background: #ffffff;
-            border: 1.5px solid #eaeaea;
-            border-radius: 20px;
+            border: 1px solid #e5e7eb;
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 12px auto;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+            margin: 0 auto 10px auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
         }
         .modal-logo-area {
             font-weight: 700;
-            font-size: 17px;
+            font-size: 16.5px;
             color: #1a1a1a;
             margin-bottom: 6px;
         }
         .modal-amount {
-            font-size: 26px;
+            font-size: 25px;
             font-weight: 800;
             color: #1b6ef3;
             letter-spacing: -0.5px;
@@ -442,7 +442,6 @@
             font-weight: 700;
         }
         
-        /* App Option Box Matching Image 15 Exact */
         .pay-app-btn {
             display: flex;
             justify-content: space-between;
@@ -455,38 +454,35 @@
             cursor: pointer;
             height: 56px;
         }
-        .app-brand-left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* SVG Logos for Paytm and PhonePe Exact Branding */
+        
+        /* Exact Original Paytm Branding Style (Image 15) */
         .paytm-logo-text {
             font-family: Arial, sans-serif;
             font-weight: 900;
             font-size: 26px;
-            letter-spacing: -0.8px;
+            letter-spacing: -0.9px;
+            line-height: 1;
         }
         .paytm-blue { color: #002e6e; }
         .paytm-cyan { color: #00b9f1; }
 
+        /* Exact Original PhonePe Branding Style (Image 15) */
         .phonepe-brand {
             display: flex;
             align-items: center;
             gap: 10px;
         }
         .phonepe-icon-circle {
-            width: 36px;
-            height: 36px;
+            width: 34px;
+            height: 34px;
             background: #5f259f;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-weight: 800;
-            font-size: 18px;
+            font-weight: 700;
+            font-size: 16px;
             font-family: Arial, sans-serif;
         }
         .phonepe-text {
@@ -496,11 +492,14 @@
             font-family: Arial, sans-serif;
             letter-spacing: -0.3px;
         }
-
-        /* Exact Hand Tap Icon on Right */
+        
+        /* Exact Original Hand/Click Tap Icon Style (Image 15) */
         .hand-tap-icon {
-            width: 26px;
-            height: 26px;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .upi-copy-box {
@@ -644,7 +643,7 @@
     <div class="modal-content" onclick="event.stopPropagation()">
         <div class="modal-header">
             <div class="modal-logo-box">
-                <svg width="42" height="42" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z" fill="#2977ff"/>
                     <path d="M7 16V9L10 13L13 9V16M15 16V13C15 11.8954 15.8954 11 17 11V16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -682,7 +681,7 @@
     </div>
 </div>
 
-<!-- Step 3: Final Payment Gateway Screen - Exact Match with Image 15 -->
+<!-- Step 3: Final Payment Gateway Screen - Exact Image 15 Match -->
 <div id="step3Screen">
     <div class="step3-container">
         <div class="step3-top-header">
@@ -696,33 +695,35 @@
                 <span class="timer" id="lblTimer">04:50</span>
             </div>
 
-            <!-- Exact Original Paytm Option -->
+            <!-- Paytm Option -->
             <div class="pay-app-btn" onclick="alert('Opening Paytm App...')">
                 <div class="paytm-logo-text">
                     <span class="paytm-blue">pay</span><span class="paytm-cyan">tm</span>
                 </div>
-                <!-- Blue Hand Tap Icon -->
+                <!-- Exact Original Hand Click Icon (Image 15) -->
                 <div class="hand-tap-icon">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="#0088ff" stroke-width="2"/>
-                        <path d="M11.5 8V12.5L14 15" stroke="#0088ff" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M15 11C15 11 16.5 12.5 16.5 14C16.5 15.5 15 17 13.5 17C12 17 10 15 10 15" stroke="#0088ff" stroke-width="1.8" stroke-linecap="round"/>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 11V6a2 2 0 0 0-4 0v5" stroke="#007aff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14 10V4a2 2 0 0 0-4 0v6" stroke="#007aff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M10 10.5V6a2 2 0 0 0-4 0v8.5" stroke="#007aff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M6 14v2a6 6 0 0 0 6 6h2a6 6 0 0 0 6-6v-4" stroke="#007aff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>
             </div>
 
-            <!-- Exact Original PhonePe Option -->
+            <!-- PhonePe Option -->
             <div class="pay-app-btn" onclick="alert('Opening PhonePe App...')">
                 <div class="phonepe-brand">
                     <div class="phonepe-icon-circle">पे</div>
                     <span class="phonepe-text">PhonePe</span>
                 </div>
-                <!-- Blue Hand Tap Icon -->
+                <!-- Exact Original Hand Click Icon (Image 15) -->
                 <div class="hand-tap-icon">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="#0088ff" stroke-width="2"/>
-                        <path d="M11.5 8V12.5L14 15" stroke="#0088ff" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M15 11C15 11 16.5 12.5 16.5 14C16.5 15.5 15 17 13.5 17C12 17 10 15 10 15" stroke="#0088ff" stroke-width="1.8" stroke-linecap="round"/>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 11V6a2 2 0 0 0-4 0v5" stroke="#007aff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14 10V4a2 2 0 0 0-4 0v6" stroke="#007aff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M10 10.5V6a2 2 0 0 0-4 0v8.5" stroke="#007aff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M6 14v2a6 6 0 0 0 6 6h2a6 6 0 0 0 6-6v-4" stroke="#007aff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>
             </div>
