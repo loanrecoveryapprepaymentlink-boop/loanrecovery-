@@ -32,11 +32,11 @@
         
         /* Top Banner Card */
         .top-card {
-            background: linear-gradient(100deg, #5392ff 0%, #2b68ff 50%, #174adb 100%);
+            background: linear-gradient(135deg, #4da3ff 0%, #2977ff 50%, #1052dc 100%);
             margin: 14px 14px 0 14px;
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;
-            padding: 24px 15px;
+            padding: 22px 15px;
             text-align: center;
         }
         .logo-area {
@@ -103,13 +103,13 @@
         }
         .value-blue {
             font-size: 22px;
-            font-weight: 700;
-            color: #2b68ff;
+            font-weight: 800;
+            color: #1b6ef3;
         }
         .value-date {
             font-size: 20px;
             font-weight: 700;
-            color: #2b68ff;
+            color: #2977ff;
         }
         .order-row {
             display: flex;
@@ -206,7 +206,7 @@
         .btn-discount {
             width: 100%;
             height: 48px;
-            background: #2b68ff;
+            background: #2b70ff;
             border: none;
             border-radius: 14px;
             font-size: 14.5px;
@@ -217,7 +217,7 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
-            box-shadow: 0 4px 12px rgba(43, 104, 255, 0.25);
+            box-shadow: 0 4px 12px rgba(43, 112, 255, 0.2);
         }
         .arrow-circle {
             width: 20px;
@@ -253,7 +253,7 @@
             font-weight: 600;
         }
 
-        /* Modal Overlay (Step 2) - Exact Match */
+        /* Modal Overlay (Step 2) - Exact Original Match */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -284,8 +284,8 @@
             margin-bottom: 22px;
         }
         .modal-logo-box {
-            width: 52px;
-            height: 52px;
+            width: 54px;
+            height: 54px;
             background: #ffffff;
             border: 1px solid #f0f0f0;
             border-radius: 16px;
@@ -302,9 +302,9 @@
             margin-bottom: 6px;
         }
         .modal-amount {
-            font-size: 27px;
+            font-size: 28px;
             font-weight: 800;
-            color: #2b68ff;
+            color: #1b6ef3;
             letter-spacing: -0.5px;
         }
         .warning-box {
@@ -341,7 +341,7 @@
         }
         .payment-option-right {
             font-weight: 700;
-            color: #1a1a1a;
+            color: #111827; /* Dark black amount color matching original */
             display: flex;
             align-items: center;
             gap: 10px;
@@ -364,9 +364,10 @@
             border-radius: 50%;
             background: #f3f4f6;
         }
+        /* Solid Dark Black Repay Button */
         .btn-repay-modal {
             width: 100%;
-            background: #22262e;
+            background: #222222;
             color: white;
             border: none;
             padding: 16px;
@@ -378,7 +379,7 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        /* Step 3 Screen Styles */
+        /* Step 3 Gateway Screen */
         #step3Screen {
             display: none;
             position: fixed;
@@ -445,14 +446,28 @@
             background: #f9fafb;
             cursor: pointer;
         }
+        .pay-app-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .app-logo-box {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         .pay-app-name {
-            font-weight: 700;
-            font-size: 20px;
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
         }
         .pay-app-name.paytm { color: #00b9f1; }
         .pay-app-name.phonepe { color: #5f259f; }
+        
         .click-icon {
-            color: #0066ff;
+            color: #0088cc;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -472,7 +487,7 @@
             color: #111827;
         }
         .copy-btn {
-            background: #0066ff;
+            background: #2977ff;
             color: white;
             border: none;
             padding: 10px 22px;
@@ -492,12 +507,12 @@
             background: #f9fafb;
         }
         .utr-input:focus {
-            border-color: #2563eb;
+            border-color: #2977ff;
             background: #ffffff;
         }
         .submit-utr-btn {
             width: 100%;
-            background: #0066ff;
+            background: #2977ff;
             color: white;
             border: none;
             padding: 15px;
@@ -523,8 +538,8 @@
         <div class="logo-area">
             <div class="logo-box">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="24" height="24" rx="6" fill="#2b68ff"/>
-                    <path d="M6 17V7L10 13L14 7V17M14 17L18 11" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z" fill="#2977ff"/>
+                    <path d="M7 16V9L10 13L13 9V16M15 16V13C15 11.8954 15.8954 11 17 11V16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </div>
             <div class="brand-name" id="lblBrandName">DaulatMoney</div>
@@ -593,14 +608,14 @@
     </div>
 </div>
 
-<!-- Step 2: Modal Popup (Exact Original Match) -->
+<!-- Step 2: Modal Popup -->
 <div class="modal-overlay" id="paymentModal" onclick="closeModal(event)">
     <div class="modal-content" onclick="event.stopPropagation()">
         <div class="modal-header">
             <div class="modal-logo-box">
-                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="24" height="24" rx="6" fill="#2b68ff"/>
-                    <path d="M6 17V7L10 13L14 7V17M14 17L18 11" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z" fill="#2977ff"/>
+                    <path d="M7 16V9L10 13L13 9V16M15 16V13C15 11.8954 15.8954 11 17 11V16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </div>
             <div class="modal-logo-area">Pay to <span id="lblModalBrand">DaulatMoney</span></div>
@@ -617,7 +632,7 @@
                 <span class="sub-text" id="lblWalletSub">Available balance: ₹0</span>
             </div>
             <div class="payment-option-right">
-                <span style="color: #6b7280; font-weight: 500;" id="lblWalletDeduct">-₹0</span>
+                <span style="color: #111827; font-weight: 700;" id="lblWalletDeduct">-₹0</span>
                 <div class="radio-dot-gray"></div>
             </div>
         </div>
@@ -627,7 +642,7 @@
                 <span>UPI</span>
             </div>
             <div class="payment-option-right">
-                <span style="color: #2b68ff;" id="lblUpiAmount">-₹3,329</span>
+                <span style="color: #111827; font-weight: 700;" id="lblUpiAmount">-₹3,329</span>
                 <div class="radio-dot">✓</div>
             </div>
         </div>
@@ -651,16 +666,32 @@
             </div>
 
             <div class="pay-app-btn" onclick="alert('Opening Paytm App...')">
-                <span class="pay-app-name paytm">paytm</span>
+                <div class="pay-app-left">
+                    <div class="app-logo-box">
+                        <svg width="26" height="26" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#00b9f1"/><path d="M9 16h3.5v6H15v-6h3.5v-2H9v2z" fill="#fff"/></svg>
+                    </div>
+                    <span class="pay-app-name paytm">Paytm</span>
+                </div>
                 <span class="click-icon">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0066ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-4 0v5"></path><path d="M14 10V4a2 2 0 0 0-4 0v6"></path><path d="M10 10.5V6a2 2 0 0 0-4 0v8.5"></path><path d="M6 14v2a6 6 0 0 0 6 6h2a6 6 0 0 0 6-6v-4"></path></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0088cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/>
+                        <path d="M12 6v6l4 2"/>
+                    </svg>
                 </span>
             </div>
 
             <div class="pay-app-btn" onclick="alert('Opening PhonePe App...')">
-                <span class="pay-app-name phonepe">PhonePe</span>
+                <div class="pay-app-left">
+                    <div class="app-logo-box">
+                        <svg width="26" height="26" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#5f259f"/><path d="M10 9h6.5a4.5 4.5 0 0 1 0 9H13v5h-3V9zm3 6h3.5a1.5 1.5 0 0 0 0-3H13v3z" fill="#fff"/></svg>
+                    </div>
+                    <span class="pay-app-name phonepe">PhonePe</span>
+                </div>
                 <span class="click-icon">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0066ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-4 0v5"></path><path d="M14 10V4a2 2 0 0 0-4 0v6"></path><path d="M10 10.5V6a2 2 0 0 0-4 0v8.5"></path><path d="M6 14v2a6 6 0 0 0 6 6h2a6 6 0 0 0 6-6v-4"></path></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0088cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/>
+                        <path d="M12 6v6l4 2"/>
+                    </svg>
                 </span>
             </div>
         </div>
@@ -757,12 +788,14 @@
         document.getElementById('step1Screen').style.display = 'none';
         document.getElementById('step3Screen').style.display = 'flex';
     }
+
     function copyUpi() {
         if(navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard.writeText(CONFIG.upiIdToCopy);
         }
         alert('Copy UPI Successfully!');
     }
+
     function submitUtr() {
         const utr = document.getElementById('utrInput').value;
         if(utr.length < 10) {
