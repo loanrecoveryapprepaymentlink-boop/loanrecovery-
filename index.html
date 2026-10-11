@@ -12,7 +12,7 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
         body {
-            background-color: #f2f3f7;
+            background-color: #f3f4f8;
             color: #333;
             display: flex;
             justify-content: center;
@@ -22,64 +22,67 @@
         }
         .container {
             width: 100%;
-            max-width: 420px;
-            background: #f2f3f7;
-            border-radius: 20px;
+            max-width: 410px;
+            background: #f3f4f8;
+            border-radius: 24px;
             overflow: hidden;
             position: relative;
-            padding-bottom: 30px;
+            padding-bottom: 25px;
         }
+        
         /* Top Banner Card */
         .top-card {
-            background: linear-gradient(135deg, #2b70ff 0%, #1a56db 100%);
-            margin: 15px;
-            border-radius: 20px;
-            padding: 25px 20px;
+            background: linear-gradient(135deg, #4A86FF 0%, #2563EB 100%);
+            margin: 14px 14px 0 14px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            padding: 24px 15px;
             color: white;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(43, 112, 255, 0.3);
         }
         .logo-area {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
-        .logo-icon {
-            width: 32px;
-            height: 32px;
+        .logo-box {
+            width: 34px;
+            height: 34px;
             background: white;
-            color: #1a56db;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 18px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         .brand-name {
-            font-size: 22px;
+            font-size: 23px;
             font-weight: 700;
+            letter-spacing: -0.3px;
+            color: #ffffff;
         }
         .mobile-num {
-            font-size: 14px;
-            opacity: 0.9;
+            font-size: 13.5px;
+            color: rgba(255, 255, 255, 0.92);
+            font-weight: 400;
         }
 
         /* Amount & Date Card */
         .info-box {
             background: white;
-            margin: 0 15px 15px 15px;
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            margin: 0 14px 14px 14px;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            padding: 18px 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
         }
         .amount-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-bottom: 15px;
+            padding-bottom: 14px;
             border-bottom: 1px dashed #e5e7eb;
         }
         .amount-col {
@@ -87,111 +90,126 @@
         }
         .amount-col:first-child {
             border-right: 1px solid #f3f4f6;
-            padding-right: 15px;
+            padding-right: 10px;
         }
         .amount-col:last-child {
             padding-left: 15px;
         }
         .label {
             font-size: 13px;
-            color: #6b7280;
-            margin-bottom: 4px;
+            color: #8c93a0;
+            margin-bottom: 3px;
+            font-weight: 400;
         }
         .value-blue {
-            font-size: 20px;
+            font-size: 21px;
             font-weight: 700;
-            color: #1a56db;
+            color: #2563eb;
         }
         .value-date {
-            font-size: 18px;
+            font-size: 19px;
             font-weight: 700;
-            color: #1a56db;
+            color: #2563eb;
         }
         .order-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 15px;
-            font-size: 14px;
+            padding-top: 14px;
+            font-size: 13.5px;
+            color: #4b5563;
         }
         .order-id {
-            color: #374151;
+            color: #1f2937;
             font-weight: 600;
+            margin-left: 8px;
         }
         .overdue-badge {
-            background: #fef2f2;
-            color: #dc2626;
-            border: 1px solid #fca5a5;
-            padding: 4px 12px;
+            color: #e11d48;
+            border: 1px solid #fda4af;
+            padding: 2px 12px;
             border-radius: 20px;
             font-size: 12px;
             font-weight: 600;
+            background: #fff;
         }
 
         /* Loan Details Section */
         .details-card {
             background: white;
-            margin: 0 15px 20px 15px;
-            border-radius: 16px;
+            margin: 0 14px 14px 14px;
+            border-radius: 20px;
             padding: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
         }
         .section-title {
             font-size: 15px;
             font-weight: 700;
             color: #1f2937;
-            margin-bottom: 15px;
+            margin-bottom: 16px;
         }
         .detail-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
-            font-size: 14px;
+            margin-bottom: 13px;
+            font-size: 13.5px;
         }
         .detail-label {
             color: #4b5563;
+            font-weight: 400;
         }
         .detail-value {
             font-weight: 600;
-            color: #111827;
+            color: #1f2937;
         }
         .terms-text {
             font-size: 11px;
             color: #9ca3af;
-            margin-top: 15px;
-            line-height: 1.4;
+            margin-top: 18px;
+            line-height: 1.45;
+            text-align: center;
         }
         .terms-text a {
-            color: #2563eb;
+            color: #3b82f6;
             text-decoration: none;
         }
 
         /* Bottom Action Buttons */
         .action-container {
             display: flex;
-            gap: 12px;
-            padding: 0 15px;
+            gap: 10px;
+            padding: 0 14px;
+            margin-top: 22px;
+            position: relative;
         }
         .btn-repayment {
             flex: 1;
             background: white;
-            border: 1px solid #d1d5db;
-            padding: 14px;
-            border-radius: 12px;
-            font-size: 15px;
+            border: none;
+            padding: 12px;
+            border-radius: 14px;
+            font-size: 14.5px;
             font-weight: 600;
-            color: #374151;
+            color: #4b5563;
             cursor: pointer;
-            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-discount-wrapper {
+            flex: 1.7;
+            position: relative;
         }
         .btn-discount {
-            flex: 1.5;
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            width: 100%;
+            height: 48px;
+            background: #2563eb;
             border: none;
-            padding: 14px;
-            border-radius: 12px;
-            font-size: 15px;
+            border-radius: 14px;
+            font-size: 14.5px;
             font-weight: 600;
             color: white;
             cursor: pointer;
@@ -199,29 +217,39 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
-            box-shadow: 0 4px 12px rgba(37, 99, 235,.3);
-            position: relative;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+        }
+        .arrow-circle {
+            width: 20px;
+            height: 20px;
+            border: 1.5px solid rgba(255,255,255,0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
         }
         .fire-badge {
             position: absolute;
-            top: -10px;
-            right: 15px;
+            top: -11px;
+            right: 12px;
             background: #ef4444;
             color: white;
             font-size: 10px;
             padding: 2px 8px;
-            border-radius: 10px;
+            border-radius: 10px 10px 10px 0;
             font-weight: 700;
-            box-shadow: 0 2px 6px rgba(239, 68, 68, 0.4);
+            box-shadow: 0 2px 5px rgba(239, 68, 68, 0.3);
+            white-space: nowrap;
         }
         .footer-note {
             text-align: center;
-            font-size: 11px;
-            color: #6b7280;
-            margin-top: 15px;
+            font-size: 11.5px;
+            color: #9ca3af;
+            margin-top: 14px;
         }
         .footer-note span {
-            color: #2563eb;
+            color: #3b82f6;
             font-weight: 600;
         }
 
@@ -241,7 +269,7 @@
         .modal-content {
             background: white;
             width: 100%;
-            max-width: 420px;
+            max-width: 410px;
             border-top-left-radius: 24px;
             border-top-right-radius: 24px;
             padding: 25px 20px 30px 20px;
@@ -353,8 +381,8 @@
         }
         .step3-container {
             width: 100%;
-            max-width: 420px;
-            background: #f2f3f7;
+            max-width: 410px;
+            background: #f3f4f8;
             min-height: 100vh;
             padding-bottom: 30px;
         }
@@ -475,7 +503,12 @@
 <div class="container" id="step1Screen">
     <div class="top-card">
         <div class="logo-area">
-            <div class="logo-icon" id="lblLogoLetter">M</div>
+            <div class="logo-box">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="24" height="24" rx="6" fill="#2563EB"/>
+                    <path d="M6 17V7L10 13L14 7V17M14 17L18 11" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
             <div class="brand-name" id="lblBrandName">DaulatMoney</div>
         </div>
         <div class="mobile-num">Mobile Number: <span id="lblMobile">807****052</span></div>
@@ -527,11 +560,14 @@
 
     <div class="action-container">
         <button class="btn-repayment" onclick="openModal()">Repayment</button>
-        <button class="btn-discount" onclick="openModal()">
-            Discount Repayment 
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        
+        <div class="btn-discount-wrapper">
             <div class="fire-badge">🔥 95% Choices</div>
-        </button>
+            <button class="btn-discount" onclick="openModal()">
+                Discount Repayment
+                <div class="arrow-circle">↓</div>
+            </button>
+        </div>
     </div>
 
     <div class="footer-note">
@@ -544,7 +580,12 @@
     <div class="modal-content" onclick="event.stopPropagation()">
         <div class="modal-header">
             <div class="modal-logo-area">
-                <div class="logo-icon" id="lblModalLogo" style="width:24px; height:24px; font-size:14px;">M</div>
+                <div class="logo-box" style="width:22px; height:22px;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="24" height="24" rx="4" fill="#2563EB"/>
+                        <path d="M6 17V7L10 13L14 7V17M14 17L18 11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
                 Pay to <span id="lblModalBrand">DaulatMoney</span>
             </div>
             <div class="modal-amount" id="lblPayable2">₹3,329</div>
@@ -626,45 +667,46 @@
 
 <script>
     /* =========================================================================
-       🛠️ CUSTOMER CONFIGURATION SECTION (सारे बदलाव आप यहीं से करेंगे)
+       🛠️ CUSTOMER CONFIGURATION SECTION (Yahan poora number likhein)
        ========================================================================= */
     const CONFIG = {
-        // 1. ऐप और ब्रांड की जानकारी (App & Brand Info)
         brandName: "DaulatMoney",
         contractBrandName: "DaulatLine",
-        logoLetter: "M",
-        mobileNumber: "807****052",
         
-        // 2. आर्डर और तारीख (Order & Date Details)
+        // Yahan poora 10 digits ka number likhein (Jaise: 8071234052), yeh khud stars mein convert ho jayega
+        mobileNumberFull: "8071234052", 
+        
         orderNumber: "00642464690",
         repaymentDate: "03/10/2026",
         
-        // 3. मुख्य अमाउंट (Amounts for different screens)
-        payableAmountMain: "₹ 3329",         // पहला पेज (Main Screen)
-        payableAmountModal: "₹3,329",    // दूसरा पेज (Modal Popup)
-        payableAmountStep3: "₹3328.99",  // तीसरा पेज (Gateway Screen)
-        discountText: "Get ₹0.01 off",     // तीसरे पेज का डिस्काउंट टेक्स्ट
-        timerValue: "04:50",             // टाइमर
+        payableAmountMain: "₹ 3329",         
+        payableAmountModal: "₹3,329",    
+        payableAmountStep3: "₹3328.99",  
+        discountText: "Get ₹0.01 off",     
+        timerValue: "04:50",             
         
-        // 4. लोन ब्रेकडाउन डिटेल्स (Loan Breakdown details - Step 1)
         loanAmount: "₹3,000",
         disbursedAmount: "₹1,800",
         loanTerm: "7Days",
-        interestRate: "₹29",             // 👈 यहाँ से आप ब्याज/इंटरेस्ट बदल सकते हैं (जैसे: ₹147, ₹100, आदि)
-        overdueFee: "₹300",              // 👈 ओवरड्यू फीस यहाँ बदलें
+        interestRate: "₹29",             
+        overdueFee: "₹300",              
         
-        // 5. वॉलेट और यूपीआई सेटिंग्स (Wallet & UPI Payment Gateway Settings)
-        walletBalanceDisplay: "₹0",      // वॉलेट बैलेंस
-        upiIdToCopy: "637************bkns" // 👈 कस्टमर की यूपीआई आईडी यहाँ डालें
+        walletBalanceDisplay: "₹0",      
+        upiIdToCopy: "637************bkns" 
     };
 
-    // Auto-apply all configurations across all pages
+    // Auto format mobile number to masked format (e.g. 807****052)
+    function formatMobile(num) {
+        if(num.length === 10) {
+            return num.substring(0, 3) + "****" + num.substring(7);
+        }
+        return num;
+    }
+
     window.onload = function() {
-        // Step 1 Bindings
         document.getElementById('lblBrandName').innerText = CONFIG.brandName;
         document.getElementById('lblContractBrand').innerText = CONFIG.contractBrandName;
-        document.getElementById('lblLogoLetter').innerText = CONFIG.logoLetter;
-        document.getElementById('lblMobile').innerText = CONFIG.mobileNumber;
+        document.getElementById('lblMobile').innerText = formatMobile(CONFIG.mobileNumberFull);
         document.getElementById('lblPayable1').innerText = CONFIG.payableAmountMain;
         document.getElementById('lblDate').innerText = CONFIG.repaymentDate;
         document.getElementById('lblOrder').innerText = CONFIG.orderNumber;
@@ -675,16 +717,13 @@
         document.getElementById('lblInterest').innerText = CONFIG.interestRate;
         document.getElementById('lblOverdueFee').innerText = CONFIG.overdueFee;
         
-        // Step 2 Modal Bindings
         document.getElementById('lblModalBrand').innerText = CONFIG.brandName;
-        document.getElementById('lblModalLogo').innerText = CONFIG.logoLetter;
         document.getElementById('lblPayable2').innerText = CONFIG.payableAmountModal;
         document.getElementById('lblWarning').innerText = `Insufficient wallet balance, pay another ${CONFIG.payableAmountModal} via UPI to complete your order`;
         document.getElementById('lblWalletSub').innerText = `Available balance: ${CONFIG.walletBalanceDisplay}`;
         document.getElementById('lblWalletDeduct').innerText = `-${CONFIG.walletBalanceDisplay}`;
         document.getElementById('lblUpiAmount').innerText = `-${CONFIG.payableAmountModal}`;
         
-        // Step 3 Gateway Bindings
         document.getElementById('lblStep3Payable').innerText = `Amount Payable: ${CONFIG.payableAmountStep3}`;
         document.getElementById('lblStep3Discount').innerText = CONFIG.discountText;
         document.getElementById('lblTimer').innerText = CONFIG.timerValue;
