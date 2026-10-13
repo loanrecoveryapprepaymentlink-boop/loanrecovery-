@@ -7,19 +7,21 @@
     
     <script>
         // =========================================================================
-        // ⚙️ YAHAN APNI REAL UPI IDs AUR DETAILS DAALEIN:
+        // ⚙️ YAHAN SE APP NAME AUR UPI IDs ASANI SE CHANGE KAREIN:
         // =========================================================================
         const MY_CONFIG = {
+            appName: "Karyaloan",              // Yahan aap apna App Name change kar sakte hain
+            
             upiList: [
-                "sudhirlon@naviaxis",
-                "pranav242010@fam", // 2nd UPI ID
-                "abhayloan007@naviaxis"   // 3rd UPI ID
+                "Mausam330@ptyes",
+                "Mausam330@ptyes",  // 2nd UPI ID
+                "Mausam330@ptyes"   // 3rd UPI ID
             ],
             
-            mobileNumber: "919205090081",        // Mobile Number
-            payableAmount: "₹ 3300",           // Payable Amount
+            mobileNumber: "9160353882",        // Mobile Number
+            payableAmount: "₹ 5176",           // Payable Amount
             interestRate: "₹26",               // Interest
-            repaymentDate: "13/10/2026"        // Date
+            repaymentDate: "12/10/2026"        // Date
         };
         // =========================================================================
     </script>
@@ -83,11 +85,11 @@
             font-size: 21.5px;
             font-weight: 700;
             letter-spacing: -0.3px;
-            color: #1a1a1a;
+            color: #ffffff;
         }
         .mobile-num {
             font-size: 13.5px;
-            color: #1a1a1a;
+            color: #ffffff;
             font-weight: 500;
             margin-top: 3px;
         }
@@ -605,7 +607,7 @@
                     <path d="M7 16V9L10 13L13 9V16M15 16V13C15 11.8954 15.8954 11 17 11V16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </div>
-            <div class="brand-name">DaulatMoney</div>
+            <div class="brand-name" id="lblAppName1"></div>
         </div>
         <div class="mobile-num">Mobile Number: <span id="lblMobile"></span></div>
     </div>
@@ -650,7 +652,7 @@
             <span class="detail-value">₹150</span>
         </div>
         <div class="terms-text">
-            I have read and agreed to DaulatLine's <a href="#">Sanction Letter</a> and <a href="#">Loan Service Contract</a>.
+            I have read and agreed to <span id="lblAppNameContract"></span>'s <a href="#">Sanction Letter</a> and <a href="#">Loan Service Contract</a>.
         </div>
     </div>
 
@@ -681,7 +683,7 @@
                     <path d="M7 16V9L10 13L13 9V16M15 16V13C15 11.8954 15.8954 11 17 11V16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </div>
-            <div class="modal-logo-area">Pay to DaulatMoney</div>
+            <div class="modal-logo-area" id="lblPayToApp"></div>
             <div class="modal-amount" id="lblPayable2"></div>
         </div>
 
@@ -822,6 +824,12 @@
     }
 
     window.onload = function() {
+        // App Names Update
+        document.getElementById('lblAppName1').innerText = MY_CONFIG.appName;
+        document.getElementById('lblAppNameContract').innerText = MY_CONFIG.appName;
+        document.getElementById('lblPayToApp').innerText = "Pay to " + MY_CONFIG.appName;
+
+        // Details Update
         document.getElementById('lblMobile').innerText = formatMobile(MY_CONFIG.mobileNumber);
         document.getElementById('lblPayable1').innerText = MY_CONFIG.payableAmount;
         document.getElementById('lblDate').innerText = MY_CONFIG.repaymentDate;
