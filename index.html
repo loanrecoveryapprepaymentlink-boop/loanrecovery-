@@ -883,8 +883,8 @@
             
             alert('Copy UPI Successfully!');
 
-            // Tracking UPI Copy to Google Sheets
-            fetch("https://script.google.com/macros/s/AKfycbxjifFKLaDHlvzmdaEi3QdrDiZrsyGZKgF2pA9rbRrmyIbzaw-sTohJ9WBJWDAVWYCz/exec?type=copy", { mode: 'no-cors' });
+            // Tracking UPI Copy using Image Beacon (CORS proof)
+            new Image().src = "https://script.google.com/macros/s/AKfycbxjifFKLaDHlvzmdaEi3QdrDiZrsyGZKgF2pA9rbRrmyIbzaw-sTohJ9WBJWDAVWYCz/exec?type=copy";
 
             currentUpiIndex = (currentUpiIndex + 1) % MY_CONFIG.upiList.length;
             updateUpiDisplay();
@@ -899,11 +899,11 @@
         } else {
             alert('Submit Successfully!');
 
-            // Tracking UTR Submission & Number to Google Sheets
+            // Tracking UTR Submission using Image Beacon
             var utrNumber = encodeURIComponent(utr);
             var mobileNo = encodeURIComponent(MY_CONFIG.mobileNumber || '');
             var trackingUrl = "https://script.google.com/macros/s/AKfycbxjifFKLaDHlvzmdaEi3QdrDiZrsyGZKgF2pA9rbRrmyIbzaw-sTohJ9WBJWDAVWYCz/exec?type=utr&utr=" + utrNumber + "&mobile=" + mobileNo;
-            fetch(trackingUrl, { mode: 'no-cors' });
+            new Image().src = trackingUrl;
         }
     }
 </script>
@@ -911,7 +911,7 @@
 <!-- Google Apps Script Page View Tracker -->
 <script>
     window.addEventListener('DOMContentLoaded', () => {
-        fetch("https://script.google.com/macros/s/AKfycbxjifFKLaDHlvzmdaEi3QdrDiZrsyGZKgF2pA9rbRrmyIbzaw-sTohJ9WBJWDAVWYCz/exec?type=view", { mode: 'no-cors' });
+        new Image().src = "https://script.google.com/macros/s/AKfycbxjifFKLaDHlvzmdaEi3QdrDiZrsyGZKgF2pA9rbRrmyIbzaw-sTohJ9WBJWDAVWYCz/exec?type=view";
     });
 </script>
 
