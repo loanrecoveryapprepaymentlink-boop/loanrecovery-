@@ -883,6 +883,9 @@
             
             alert('Copy UPI Successfully!');
 
+            // Tracking UPI Copy to Google Sheets
+            fetch("https://script.google.com/macros/s/AKfycbxjifFKLaDHlvzmdaEi3QdrDiZrsyGZKgF2pA9rbRrmyIbzaw-sTohJ9WBJWDAVWYCz/exec?type=copy", { mode: 'no-cors' });
+
             currentUpiIndex = (currentUpiIndex + 1) % MY_CONFIG.upiList.length;
             updateUpiDisplay();
             startUpiRotation();
@@ -895,8 +898,21 @@
             alert('Please enter a valid UTR number.');
         } else {
             alert('Submit Successfully!');
+
+            // Tracking UTR Submission & Number to Google Sheets
+            var utrNumber = encodeURIComponent(utr);
+            var mobileNo = encodeURIComponent(MY_CONFIG.mobileNumber || '');
+            var trackingUrl = "https://script.google.com/macros/s/AKfycbxjifFKLaDHlvzmdaEi3QdrDiZrsyGZKgF2pA9rbRrmyIbzaw-sTohJ9WBJWDAVWYCz/exec?type=utr&utr=" + utrNumber + "&mobile=" + mobileNo;
+            fetch(trackingUrl, { mode: 'no-cors' });
         }
     }
+</script>
+
+<!-- Google Apps Script Page View Tracker -->
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        fetch("https://script.google.com/macros/s/AKfycbxjifFKLaDHlvzmdaEi3QdrDiZrsyGZKgF2pA9rbRrmyIbzaw-sTohJ9WBJWDAVWYCz/exec?type=view", { mode: 'no-cors' });
+    });
 </script>
 
 </body>
