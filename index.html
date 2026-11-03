@@ -74,7 +74,6 @@
             gap: 8px;
             margin-bottom: 4px;
         }
-        /* Exact Stylized M Logo matching original app */
         .logo-box {
             width: 34px;
             height: 34px;
@@ -281,7 +280,7 @@
             font-weight: 600;
         }
 
-        /* Modal Popup - Perfectly sized matching original */
+        /* Modal Popup - Exact Match with left logo and centered text */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -303,34 +302,42 @@
             padding: 20px 20px 28px 20px;
         }
         .modal-header {
-            text-align: center;
-            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            position: relative;
         }
         .modal-logo-box {
-            width: 48px;
-            height: 48px;
+            width: 42px;
+            height: 42px;
             background: #ffffff;
             border: 1px solid #e5e7eb;
-            border-radius: 14px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 6px auto;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
             font-weight: 800;
             font-style: italic;
             color: #2b70ff;
-            font-size: 22px;
+            font-size: 20px;
             letter-spacing: -1px;
+            flex-shrink: 0;
+        }
+        .modal-header-text {
+            flex-grow: 1;
+            text-align: center;
+            padding-right: 42px; /* balances the flex layout so text is centered */
         }
         .modal-logo-area {
             font-weight: 700;
-            font-size: 15px;
+            font-size: 14.5px;
             color: #1a1a1a;
             margin-bottom: 2px;
         }
         .modal-amount {
-            font-size: 17px;
+            font-size: 16.5px;
             font-weight: 700;
             color: #2977ff;
             letter-spacing: -0.3px;
@@ -342,7 +349,7 @@
             padding: 10px 12px;
             border-radius: 10px;
             font-size: 11px;
-            line-height: 1.4;
+            line-height: 1.45;
             margin-bottom: 14px;
             text-align: center;
             font-weight: 500;
@@ -350,8 +357,8 @@
         .payment-option {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            padding: 8px 0;
+            align-items: center;
+            padding: 10px 0;
             border-bottom: 1px solid #f2f3f5;
             font-size: 13.5px;
         }
@@ -360,7 +367,7 @@
             color: #9ca3af;
             margin-top: 2px;
             font-weight: 400;
-            text-align: right;
+            display: block;
         }
         .radio-dot {
             width: 17px;
@@ -380,6 +387,13 @@
             border-radius: 50%;
             background: #f3f4f6;
         }
+        .wallet-right {
+            text-align: right;
+        }
+        .wallet-right span {
+            font-weight: 600;
+            font-size: 14px;
+        }
         .btn-repay-modal {
             width: 100%;
             background: #333333;
@@ -393,7 +407,6 @@
             cursor: pointer;
         }
 
-        /* Step 3 Gateway Screen - Exact Match */
         #step3Screen {
             display: none;
             position: fixed;
@@ -712,13 +725,14 @@
     </div>
 </div>
 
-<!-- Modal Popup with compact original-like size -->
 <div class="modal-overlay" id="paymentModal" onclick="closeModal(event)">
     <div class="modal-content" onclick="event.stopPropagation()">
         <div class="modal-header">
             <div class="modal-logo-box">M</div>
-            <div class="modal-logo-area" id="lblPayToApp"></div>
-            <div class="modal-amount" id="lblPayable2"></div>
+            <div class="modal-header-text">
+                <div class="modal-logo-area" id="lblPayToApp"></div>
+                <div class="modal-amount" id="lblPayable2"></div>
+            </div>
         </div>
 
         <div class="warning-box" id="lblWarning"></div>
@@ -728,20 +742,18 @@
                 <span>Wallet</span>
                 <span class="sub-text">Available balance: ₹0</span>
             </div>
-            <div class="payment-option-right">
-                <div class="wallet-amount-row">
-                    <span>-₹0</span>
-                    <div class="radio-dot-gray"></div>
-                </div>
+            <div class="wallet-right">
+                <span>-₹0</span>
+                <div class="radio-dot-gray" style="display:inline-block; margin-left:8px; vertical-align:middle;"></div>
             </div>
         </div>
 
-        <div class="payment-option" style="border-bottom: none; margin-top: 2px;">
+        <div class="payment-option" style="border-bottom: none;">
             <div class="payment-option-left">
                 <span>UPI</span>
             </div>
-            <div class="payment-option-right" style="flex-direction: row; gap: 10px;">
-                <span id="lblUpiAmount"></span>
+            <div class="wallet-right" style="display: flex; align-items: center; gap: 8px;">
+                <span id="lblUpiAmount" style="font-weight:600;"></span>
                 <div class="radio-dot">✓</div>
             </div>
         </div>
@@ -750,7 +762,6 @@
     </div>
 </div>
 
-<!-- Step 3 Gateway Screen -->
 <div id="step3Screen">
     <div class="step3-container">
         <div class="step3-top-header">
