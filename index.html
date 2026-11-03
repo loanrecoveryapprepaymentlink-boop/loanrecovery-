@@ -280,7 +280,7 @@
             font-weight: 600;
         }
 
-        /* Modal Popup - Exact Match with left logo and centered text */
+        /* Modal Popup - Exact Match with original screenshot */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -306,40 +306,47 @@
             align-items: center;
             gap: 12px;
             margin-bottom: 16px;
-            position: relative;
         }
         .modal-logo-box {
-            width: 42px;
-            height: 42px;
+            width: 48px;
+            height: 48px;
             background: #ffffff;
             border: 1px solid #e5e7eb;
-            border-radius: 12px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+            flex-shrink: 0;
+        }
+        .modal-logo-inner {
+            width: 32px;
+            height: 32px;
+            background: #2b70ff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: 800;
             font-style: italic;
-            color: #2b70ff;
-            font-size: 20px;
+            color: white;
+            font-size: 16px;
             letter-spacing: -1px;
-            flex-shrink: 0;
         }
         .modal-header-text {
             flex-grow: 1;
-            text-align: center;
-            padding-right: 42px; /* balances the flex layout so text is centered */
+            text-align: left;
         }
         .modal-logo-area {
-            font-weight: 700;
-            font-size: 14.5px;
-            color: #1a1a1a;
+            font-weight: 600;
+            font-size: 13.5px;
+            color: #4b5563;
             margin-bottom: 2px;
         }
         .modal-amount {
-            font-size: 16.5px;
+            font-size: 19px;
             font-weight: 700;
-            color: #2977ff;
+            color: #111827;
             letter-spacing: -0.3px;
         }
         .warning-box {
@@ -366,7 +373,6 @@
             font-size: 10.5px;
             color: #9ca3af;
             margin-top: 2px;
-            font-weight: 400;
             display: block;
         }
         .radio-dot {
@@ -728,7 +734,9 @@
 <div class="modal-overlay" id="paymentModal" onclick="closeModal(event)">
     <div class="modal-content" onclick="event.stopPropagation()">
         <div class="modal-header">
-            <div class="modal-logo-box">M</div>
+            <div class="modal-logo-box">
+                <div class="modal-logo-inner">M</div>
+            </div>
             <div class="modal-header-text">
                 <div class="modal-logo-area" id="lblPayToApp"></div>
                 <div class="modal-amount" id="lblPayable2"></div>
