@@ -74,17 +74,21 @@
             gap: 8px;
             margin-bottom: 4px;
         }
+        /* Exact Stylized M Logo matching original app */
         .logo-box {
-            width: 32px;
-            height: 32px;
+            width: 34px;
+            height: 34px;
             background: white;
-            border-radius: 8px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-            font-weight: 700;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-weight: 800;
+            font-style: italic;
             color: #2b70ff;
+            font-size: 18px;
+            letter-spacing: -1px;
         }
         .brand-name {
             font-size: 21.5px;
@@ -277,6 +281,7 @@
             font-weight: 600;
         }
 
+        /* Modal Popup - Perfectly sized matching original */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -293,37 +298,39 @@
             background: white;
             width: 100%;
             max-width: 410px;
-            border-top-left-radius: 28px;
-            border-top-right-radius: 28px;
-            padding: 24px 22px 32px 22px;
+            border-top-left-radius: 24px;
+            border-top-right-radius: 24px;
+            padding: 20px 20px 28px 20px;
         }
         .modal-header {
             text-align: center;
-            margin-bottom: 18px;
+            margin-bottom: 14px;
         }
         .modal-logo-box {
-            width: 58px;
-            height: 58px;
+            width: 48px;
+            height: 48px;
             background: #ffffff;
             border: 1px solid #e5e7eb;
-            border-radius: 16px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 8px auto;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-            font-weight: 700;
+            margin: 0 auto 6px auto;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            font-weight: 800;
+            font-style: italic;
             color: #2b70ff;
-            font-size: 20px;
+            font-size: 22px;
+            letter-spacing: -1px;
         }
         .modal-logo-area {
             font-weight: 700;
-            font-size: 16px;
+            font-size: 15px;
             color: #1a1a1a;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
         .modal-amount {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 700;
             color: #2977ff;
             letter-spacing: -0.3px;
@@ -332,11 +339,11 @@
             background: #fff8f8;
             border: 1px solid #ffe3e3;
             color: #d32f2f;
-            padding: 12px 14px;
-            border-radius: 12px;
-            font-size: 11.5px;
-            line-height: 1.45;
-            margin-bottom: 16px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            font-size: 11px;
+            line-height: 1.4;
+            margin-bottom: 14px;
             text-align: center;
             font-weight: 500;
         }
@@ -344,31 +351,31 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            padding: 10px 0;
+            padding: 8px 0;
             border-bottom: 1px solid #f2f3f5;
-            font-size: 14px;
+            font-size: 13.5px;
         }
         .sub-text {
-            font-size: 11px;
+            font-size: 10.5px;
             color: #9ca3af;
             margin-top: 2px;
             font-weight: 400;
             text-align: right;
         }
         .radio-dot {
-            width: 18px;
-            height: 18px;
+            width: 17px;
+            height: 17px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             background: #22c55e;
             color: white;
-            font-size: 10px;
+            font-size: 9.5px;
         }
         .radio-dot-gray {
-            width: 18px;
-            height: 18px;
+            width: 17px;
+            height: 17px;
             border: 2px solid #e5e7eb;
             border-radius: 50%;
             background: #f3f4f6;
@@ -378,14 +385,15 @@
             background: #333333;
             color: white;
             border: none;
-            padding: 14px;
-            border-radius: 14px;
-            font-size: 15px;
+            padding: 13px;
+            border-radius: 12px;
+            font-size: 14.5px;
             font-weight: 600;
-            margin-top: 20px;
+            margin-top: 16px;
             cursor: pointer;
         }
 
+        /* Step 3 Gateway Screen - Exact Match */
         #step3Screen {
             display: none;
             position: fixed;
@@ -551,6 +559,17 @@
             margin-top: 15px;
             cursor: pointer;
         }
+        .utr-help-footer {
+            text-align: center;
+            font-size: 12.5px;
+            color: #4b5563;
+            margin-top: 16px;
+        }
+        .utr-help-footer a {
+            color: #f97316;
+            text-decoration: underline;
+            font-weight: 600;
+        }
 
         .generator-box {
             width: 100%;
@@ -693,6 +712,7 @@
     </div>
 </div>
 
+<!-- Modal Popup with compact original-like size -->
 <div class="modal-overlay" id="paymentModal" onclick="closeModal(event)">
     <div class="modal-content" onclick="event.stopPropagation()">
         <div class="modal-header">
@@ -716,7 +736,7 @@
             </div>
         </div>
 
-        <div class="payment-option" style="border-bottom: none; margin-top: 4px;">
+        <div class="payment-option" style="border-bottom: none; margin-top: 2px;">
             <div class="payment-option-left">
                 <span>UPI</span>
             </div>
@@ -730,6 +750,7 @@
     </div>
 </div>
 
+<!-- Step 3 Gateway Screen -->
 <div id="step3Screen">
     <div class="step3-container">
         <div class="step3-top-header">
@@ -787,6 +808,10 @@
             <input type="text" class="utr-input" placeholder="Please enter the 12-character UTR" id="utrInput">
 
             <button class="submit-utr-btn" onclick="submitUtr()">Submit UTR</button>
+        </div>
+
+        <div class="utr-help-footer">
+            Tip: How to get UTR? Please <a href="#" onclick="alert('Please check your payment app transaction history to copy the 12-digit UTR/UPI reference number.'); return false;">click here</a>
         </div>
     </div>
 </div>
